@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- 여행지 선택 드롭다운 메뉴 -->
+        <Spinner
+            android:id="@+id/destinationSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:prompt="@string/destination_prompt"
+            android:entries="@array/destination_array" />
+
+        <!-- 여행 출발일을 선택하는 버튼 -->
+        <Button
+            android:id="@+id/startDateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="출발일 선택" />
+
+        <!-- 여행 종료일을 선택하는 버튼 -->
+        <Button
+            android:id="@+id/endDateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="도착일 선택" />
+
+        <!-- 여행 구성원을 선택하는 라디오 그룹 -->
+        <RadioGroup
+            android:id="@+id/memberRadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/soloRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="혼자" />
+
+            <RadioButton
+                android:id="@+id/coupleRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="연인" />
+
+            <RadioButton
+                android:id="@+id/familyRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="가족" />
+
+            <RadioButton
+                android:id="@+id/friendRadioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="친구" />
+        </RadioGroup>
+
+        <!-- 여행 루트 생성 버튼 -->
+        <Button
+            android:id="@+id/createPlanButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="여행 루트 생성" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

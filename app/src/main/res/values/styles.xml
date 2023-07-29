@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 상단바 없애기 -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
+
+    <!-- res/values/styles.xml 파일 내에 추가 -->
+    <style name="ThickButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:background">@drawable/button_rounded_background</item>
+    </style>
+
+
+
+</resources>

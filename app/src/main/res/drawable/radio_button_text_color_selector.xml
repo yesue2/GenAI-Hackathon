@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/drawable/radio_button_text_color_selector.xml -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 선택되지 않은 상태일 때 글자 색 (회색) -->
+    <item android:textColor="#999999" />
+
+    <!-- 선택된 상태일 때 글자 색 (검정색) -->
+    <item android:textColor="#222222" android:state_checked="true" />
+</selector>

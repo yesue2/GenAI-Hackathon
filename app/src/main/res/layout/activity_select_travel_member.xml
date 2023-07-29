@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ic_hot_air_baloon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:src="@drawable/ic_hot_air_baloon"
+        android:layout_marginTop="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_selectMember"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_selectMember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="여행원 구성을 선택해주세요"
+        android:textColor="#222222"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/dispositionRadioGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ic_hot_air_baloon"
+        tools:ignore="MissingConstraints"
+        android:textStyle="bold"/>
+
+    <!-- 성향 버튼들 -->
+    <RadioGroup
+        android:id="@+id/dispositionRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/nextButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.784">
+
+        <!-- 성향 라디오 버튼들... -->
+        <RadioButton
+            android:id="@+id/aloneRadioButton"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/radio_button_background_blue"
+            android:button="@drawable/toggle_background"
+            android:paddingLeft="50dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:text="혼자"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/loverRadioButton"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/radio_button_background_blue"
+            android:button="@drawable/toggle_background"
+            android:paddingLeft="50dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:text="연인"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/familyRadioButton"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/radio_button_background_blue"
+            android:button="@drawable/toggle_background"
+            android:paddingLeft="50dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:text="가족"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/friendRadioButton"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/radio_button_background_blue"
+            android:button="@drawable/toggle_background"
+            android:paddingLeft="50dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:text="친구"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/backButton"
+        style="@style/ThickButtonStyle"
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/button_rounded_background_gray"
+        android:text="이전"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.168"
+        app:layout_constraintLeft_toRightOf="@+id/nextButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- 저장 버튼 -->
+    <Button
+        android:id="@+id/nextButton"
+        style="@style/ThickButtonStyle"
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/button_rounded_background"
+        android:text="다음"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.938"
+        app:layout_constraintLeft_toLeftOf="@+id/backButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_one"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        app:srcCompat="@drawable/ic_gray_circle"
+        tools:layout_editor_absoluteX="345dp"
+        tools:layout_editor_absoluteY="20dp"
+        tools:ignore="MissingConstraints" />
+    <ImageView
+        android:id="@+id/iv_two"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        app:srcCompat="@drawable/ic_gray_circle"
+        tools:layout_editor_absoluteX="363dp"
+        tools:layout_editor_absoluteY="20dp"
+        tools:ignore="MissingConstraints" />
+    <ImageView
+        android:id="@+id/iv_three"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        app:srcCompat="@drawable/ic_gray_circle"
+        tools:layout_editor_absoluteX="381dp"
+        tools:layout_editor_absoluteY="20dp"
+        tools:ignore="MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>

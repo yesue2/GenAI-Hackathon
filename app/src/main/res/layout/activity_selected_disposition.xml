@@ -133,7 +133,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/historyButton" />
 
-    <!-- 저장 버튼 -->
+    <!-- 다음 버튼 -->
     <Button
         android:id="@+id/saveButton"
         android:layout_width="350dp"

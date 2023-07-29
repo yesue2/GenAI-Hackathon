@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ic_travel_destination"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        android:src="@drawable/ic_campfire"
+        app:layout_constraintBottom_toTopOf="@+id/tv_selectPeriod"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_selectPeriod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="여행 기간을 결정해주세요"
+        android:textColor="#222222"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/list_area"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ic_travel_destination"
+        tools:ignore="MissingConstraints"
+        android:textStyle="bold"/>
+
+
+    <LinearLayout
+        android:id="@+id/list_area"
+        android:layout_width="386dp"
+        android:layout_height="386dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/backButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <!-- 출발일 버튼 레이아웃 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/ic_calendar_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_calendar"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="출발 일자"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
+        <!-- 여행 출발일을 선택하는 버튼 -->
+        <Button
+            android:id="@+id/startDateButton"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_rounded_date"
+            android:text="날짜를 선택해주세요"
+            android:layout_gravity="center_horizontal" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
+        <!-- 종료일 버튼 레이아웃 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/ic_calendar_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_calendar"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="도착 일자"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="16dp" />
+
+        <!-- 여행 종료일을 선택하는 버튼 -->
+        <Button
+            android:id="@+id/endDateButton"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_rounded_date"
+            android:text="날짜를 선택해주세요"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
+
+    <!-- 이전 버튼 -->
+    <Button
+        android:id="@+id/backButton"
+        style="@style/ThickButtonStyle"
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/button_rounded_background_gray"
+        android:text="이전"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.168"
+        app:layout_constraintLeft_toRightOf="@+id/nextButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- 저장 버튼 -->
+    <Button
+        android:id="@+id/nextButton"
+        style="@style/ThickButtonStyle"
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/button_rounded_background"
+        android:text="다음"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.938"
+        app:layout_constraintLeft_toLeftOf="@+id/backButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_one"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        app:srcCompat="@drawable/ic_gray_circle"
+        tools:layout_editor_absoluteX="345dp"
+        tools:layout_editor_absoluteY="20dp"
+        tools:ignore="MissingConstraints" />
+    <ImageView
+        android:id="@+id/iv_two"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        app:srcCompat="@drawable/ic_gray_circle"
+        tools:layout_editor_absoluteX="363dp"
+        tools:layout_editor_absoluteY="20dp"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/iv_three"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        app:srcCompat="@drawable/ic_ygray_circle"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="379dp"
+        tools:layout_editor_absoluteY="17dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

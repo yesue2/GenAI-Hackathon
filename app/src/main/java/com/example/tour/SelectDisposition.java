@@ -71,7 +71,6 @@ public class SelectDisposition extends AppCompatActivity {
         int endIndexA = startIndexA + "자유로운 A타입".length();
         spannableA.setSpan(new StyleSpan(Typeface.BOLD), startIndexA, endIndexA, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableA.setSpan(new RelativeSizeSpan(1.3f), startIndexA, endIndexA, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
         tvA.setText(spannableA);
 
         @SuppressLint({"MissingInflatedId", "LocalSuppress"})
@@ -114,7 +113,7 @@ public class SelectDisposition extends AppCompatActivity {
                     Log.d("SelectDisposition", "선택된 성향: " + selectedDisposition);
 
                     // TravelInfo 화면으로 넘어가기 위한 Intent 생성
-                    Intent intent = new Intent(SelectDisposition.this, TravelInfo.class);
+                    Intent intent = new Intent(SelectDisposition.this, SelectTravelArea.class);
                     startActivity(intent);
                 } else {
                     // 성향을 선택하지 않은 경우

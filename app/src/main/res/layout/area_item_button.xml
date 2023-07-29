@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- item_button.xml -->
+<Button
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/button"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:text="지역"
+    android:textColor="#FFFFFF"
+    android:textStyle="bold"
+    android:background="@drawable/button_rounded_area"
+    android:gravity="center"
+    android:padding="8dp" />

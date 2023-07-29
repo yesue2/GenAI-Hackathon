@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ic_travel_destination"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        android:src="@drawable/ic_travel_destination"
+        app:layout_constraintBottom_toTopOf="@+id/tv_selectMember"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_selectMember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="희망하는 여행 지역을\n 선택해주세요"
+        android:textColor="#222222"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ic_travel_destination"
+        tools:ignore="MissingConstraints"
+        android:textStyle="bold"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="386dp"
+        android:layout_height="260dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/tv_selectMember"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/nextButton"/>
+
+
+    <!-- 다음 버튼 -->
+    <Button
+        android:id="@+id/nextButton"
+        style="@style/ThickButtonStyle"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/button_rounded_background"
+        android:text="다음"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+    <ImageView
+        android:id="@+id/iv_one"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        app:srcCompat="@drawable/ic_gray_circle"
+        tools:layout_editor_absoluteX="345dp"
+        tools:layout_editor_absoluteY="20dp"
+        tools:ignore="MissingConstraints" />
+    <ImageView
+        android:id="@+id/iv_two"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        app:srcCompat="@drawable/ic_ygray_circle"
+        tools:layout_editor_absoluteX="361dp"
+        tools:layout_editor_absoluteY="17dp"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/iv_three"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        app:srcCompat="@drawable/ic_ygray_circle"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="379dp"
+        tools:layout_editor_absoluteY="17dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

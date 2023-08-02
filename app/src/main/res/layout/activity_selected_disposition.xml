@@ -138,7 +138,7 @@
         android:id="@+id/saveButton"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:text="다음"
+        android:text="@string/next_button"
         style="@style/ThickButtonStyle"
         android:textColor="#FFFFFF"
         android:background="@drawable/button_rounded_background"

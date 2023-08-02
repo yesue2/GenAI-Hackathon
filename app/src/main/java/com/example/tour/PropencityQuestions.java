@@ -29,10 +29,8 @@ public class PropencityQuestions extends AppCompatActivity {
         setContentView(R.layout.activity_propencity_travel);
 
         List<Question> questions = loadQuestionsFromGson();
-        Log.d("questions", questions.toString());
         LinearLayout linearLayout = findViewById(R.id.question_linearlayout);
 
-        //List<String> options = new ArrayList<>(Arrays.asList("매우그렇다","그렇다","보통이다","그렇지않다","매우그렇지않다"));
         String[] options = {"매우그렇다","그렇다","보통이다","그렇지않다","매우그렇지않다"};
         for(Question question : questions) {
             TextView textView = new TextView(this);

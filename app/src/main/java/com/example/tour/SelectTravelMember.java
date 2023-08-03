@@ -2,23 +2,43 @@ package com.example.tour;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class SelectTravelMember extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_travel_member);
+        SharedPreferences sharedPreferences = getSharedPreferences("selectTravel",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        RadioGroup dispositionRadioGroup = findViewById(R.id.dispositionRadioGroup);
+        dispositionRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                RadioButton radioButton = (RadioButton) findViewById(i);
+                Log.d("getTextradio",radioButton.getText().toString());
+                editor.putString("member", radioButton.getText().toString());
+                editor.commit();
+            }
+        });
 
         @SuppressLint({"MissingInflatedId", "LocalSuppress"})
         TextView tv = findViewById(R.id.tv_selectMember);
@@ -35,6 +55,23 @@ public class SelectTravelMember extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                JSONObject jsonObject = new JSONObject();
+                String area = sharedPreferences.getString("area", "default Area");
+                String member = sharedPreferences.getString("member", "default member");
+                String startDate = sharedPreferences.getString("startDate", "default startDate");
+                String endDate = sharedPreferences.getString("endDate", "default endDate");
+                try{
+                    jsonObject.put("area", area);
+                    jsonObject.put("member", member);
+                    jsonObject.put("startDate", startDate);
+                    jsonObject.put("endDate", endDate);
+
+                    String result = jsonObject.toString();
+                    Log.d("result", result);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 Intent intent = new Intent(SelectTravelMember.this, SelectTravelMember.class);
                 startActivity(intent);
             }

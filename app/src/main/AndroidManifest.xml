@@ -31,9 +31,28 @@
             android:name=".SelectTravelPeriod"
             android:exported="false"/>
         <activity
+            android:name=".PropencityQuestions2"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".PropencityQuestions3"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".PropencityQuestions4"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".PropencityQuestions5"
+            android:exported="false">
+        </activity>
+        <activity android:name=".PropencityResult"
+            android:exported="false">
+
+        </activity>
+        <activity
             android:name=".SelectDisposition"
-            android:label="Travel Info"
-            android:exported="true">
+            android:exported="false">
         </activity>
         <activity android:name=".PropencityQuestions"
             android:exported="true">
@@ -42,7 +61,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PropencityResult"></activity>
 
     </application>
 

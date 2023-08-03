@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PropencityQuestions extends AppCompatActivity {
+public class PropencityQuestions2 extends AppCompatActivity {
     private int[] answers;
     private List<Integer> selectedOptions = new ArrayList<>();
 
@@ -32,12 +32,13 @@ public class PropencityQuestions extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_propencity_travel);
 
+        double avg1 = getIntent().getDoubleExtra("avg1", 0.0);
+
         List<Question> questions = loadQuestionsFromGson();
         LinearLayout linearLayout = findViewById(R.id.question_linearlayout);
 
-
         String[] options = {"매우그렇다","그렇다","보통이다","그렇지않다","매우그렇지않다"};
-        for (int i = 0; i < 5; i++) {
+        for (int i = 5; i < 10; i++) {
             Question question = questions.get(i);
             TextView textView = new TextView(this);
             textView.setText(question.getText());
@@ -65,16 +66,19 @@ public class PropencityQuestions extends AppCompatActivity {
                         sum += (optionIndex + 1);
                     }
                     double average = (double) sum / selectedOptions.size();
-                    Log.d("PropencityQuestions1", "Average: " + average);
+                    Log.d("PropencityQuestions2", "Average: " + average);
 
-                    Intent intent = new Intent(PropencityQuestions.this, PropencityQuestions2.class);
-                    intent.putExtra("avg1", average);
+                    Intent intent = new Intent(PropencityQuestions2.this, PropencityQuestions3.class);
+                    intent.putExtra("avg1", avg1);
+                    intent.putExtra("avg2", average);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(PropencityQuestions.this, "모든 질문에 답변해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PropencityQuestions2.this, "모든 질문에 답변해주세요.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+
     }
 
     private boolean allQuestionsAnswered() {
@@ -101,7 +105,7 @@ public class PropencityQuestions extends AppCompatActivity {
         List<Question> questions = new ArrayList<>();
         try {
             InputStream is = getAssets().open("question.json");
-            Reader reader  = new InputStreamReader(is, "UTF-8");
+            Reader reader = new InputStreamReader(is, "UTF-8");
 
             Gson gson = new Gson();
             questions = Arrays.asList(gson.fromJson(reader, Question[].class));
@@ -113,5 +117,3 @@ public class PropencityQuestions extends AppCompatActivity {
         return questions;
     }
 }
-
-

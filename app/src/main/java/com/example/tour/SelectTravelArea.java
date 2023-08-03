@@ -9,16 +9,18 @@ import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.android.flexbox.FlexboxLayout;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 public class SelectTravelArea extends AppCompatActivity {
     @Override
@@ -26,13 +28,35 @@ public class SelectTravelArea extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_travel_area);
 
-        List<String> buttonDataList = new ArrayList<>();
-        // Add your button data here (total 17 items)
+        // string 배열만큼 버튼 생성
+        String[] radioBtnGroup = {"서울","부산","대구","인천", "광주","대전","울산","세종"};
+        FlexboxLayout flexboxLayout = findViewById(R.id.flexboxLayout);
+        AtomicReference<RadioButton> checkedRadioButton = new AtomicReference<>();
+        for (int i = 0; i < radioBtnGroup.length; i++) {
+            LayoutInflater layoutInflater = LayoutInflater.from(this);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ButtonAdapter adapter = new ButtonAdapter(buttonDataList);
-        recyclerView.setAdapter(adapter);
+            RadioButton radioButton = (RadioButton) layoutInflater.inflate(R.layout.travel_item_button,flexboxLayout, false );
+
+            radioButton.setText(radioBtnGroup[i]);
+            radioButton.setId(View.generateViewId());
+
+            // FlexboxLayout에 RadioButton 추가
+            flexboxLayout.addView(radioButton);
+            radioButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        RadioButton previousCheckedRadioButton = checkedRadioButton.get();
+                        if (previousCheckedRadioButton != null) {
+                            previousCheckedRadioButton.setChecked(false);
+                        }
+                        checkedRadioButton.set(radioButton);
+                        //todo: id 혹은 고유값을 받아서 저장되어야됨
+                        Log.d("checkedLog", String.valueOf(checkedRadioButton.get().getId()));
+                    }
+                }
+            });
+        }
 
         @SuppressLint({"MissingInflatedId", "LocalSuppress"})
         TextView tv = findViewById(R.id.tv_selectMember);

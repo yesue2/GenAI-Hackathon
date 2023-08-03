@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioButton
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/select_travel_1"
+    android:layout_width="128dp"
+    android:layout_height="65dp"
+    android:layout_margin="16dp"
+    android:text="지역"
+    android:textColor="#808080"
+    android:textStyle="bold"
+    android:gravity="center"
+    android:button="@drawable/toggle_background"
+    android:background="@drawable/radio_button_background_blue"
+
+    />

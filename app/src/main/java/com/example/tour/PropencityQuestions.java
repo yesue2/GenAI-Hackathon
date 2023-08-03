@@ -35,6 +35,7 @@ public class PropencityQuestions extends AppCompatActivity {
         LinearLayout linearLayout = findViewById(R.id.question_linearlayout);
 
         String[] options = {"매우그렇다","그렇다","보통이다","그렇지않다","매우그렇지않다"};
+        Log.d("test", options.toString());
         for(Question question : questions) {
             TextView textView = new TextView(this);
             textView.setText(question.getText());

@@ -1,7 +1,10 @@
 package com.example.tour;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -46,6 +49,17 @@ public class PropencityQuestions extends AppCompatActivity {
             }
             linearLayout.addView(radioGroup);
         }
+
+        Button nextBtn = findViewById(R.id.propencity_submit_button);
+
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PropencityQuestions.this, PropencityResult.class);
+                startActivity(intent);
+            }
+        });
 
     }
     private List<Question> loadQuestionsFromGson() {

@@ -29,6 +29,7 @@ public class SelectTravelPeriod extends AppCompatActivity {
 
     protected String startDate;
     protected String endDate;
+    protected int curYear, curMonth, curDay;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -38,6 +39,7 @@ public class SelectTravelPeriod extends AppCompatActivity {
 
         Button startBtn = findViewById(R.id.startDateButton);
         Button endBtn = findViewById(R.id.endDateButton);
+        endBtn.setEnabled(false);
 
         // 출발일 선택 버튼 클릭 이벤트
         startBtn.setOnClickListener(new View.OnClickListener() {
@@ -51,10 +53,12 @@ public class SelectTravelPeriod extends AppCompatActivity {
                         startBtn.setText(year + "년 " + (month + 1) + "월 " + dayOfMonth + "일");
                         Calendar calendar = Calendar.getInstance();
                         calendar.set(year, month, dayOfMonth);
+                        curYear = year;
+                        curMonth = month;
+                        curDay = dayOfMonth;
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                         startDate = dateFormat.format(calendar.getTime());
-                        editor.putString("startDate", startDate.toString());
-                        editor.commit();
+                        endBtn.setEnabled(true);
                     }
                 }, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
 
@@ -66,20 +70,25 @@ public class SelectTravelPeriod extends AppCompatActivity {
         endBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // DatePickerDialog 생성
+                 //DatePickerDialog 생성
                 DatePickerDialog datePickerDialog = new DatePickerDialog(SelectTravelPeriod.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        // 사용자가 선택한 날짜를 버튼의 텍스트로 설정
-                        endBtn.setText(year + "년 " + (month + 1) + "월 " + dayOfMonth + "일");
+                         //사용자가 선택한 날짜를 버튼의 텍스트로 설정
                         Calendar calendar = Calendar.getInstance();
                         calendar.set(year, month, dayOfMonth);
+                        endBtn.setText(year + "년 " + (month + 1) + "월 " + dayOfMonth + "일");
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+
                         endDate = dateFormat.format(calendar.getTime());
-                        editor.putString("endDate", endDate.toString());
-                        editor.commit();
                     }
-                }, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+                }, curYear,curMonth,curDay);
+
+                Calendar date = Calendar.getInstance();
+                date.set(curYear, curMonth, curDay);
+                datePickerDialog.getDatePicker().setMinDate(date.getTimeInMillis());
+                date.add(Calendar.DAY_OF_MONTH,3);
+                datePickerDialog.getDatePicker().setMaxDate(date.getTimeInMillis());
 
                 // DatePickerDialog 표시
                 datePickerDialog.show();

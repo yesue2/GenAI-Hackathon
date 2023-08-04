@@ -10,58 +10,56 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tour"
-        tools:targetApi="31" >
-
+        tools:targetApi="31">
+        <activity
+            android:name=".RecommendCourse2"
+            android:exported="false" />
         <activity
             android:name=".RecommendCourse"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".TravelInfo"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".MyPage"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".SelectTravelArea"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".SelectTravelMember"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".SelectTravelPeriod"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".PropencityQuestions2"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".PropencityQuestions3"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".PropencityQuestions4"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".PropencityQuestions5"
-            android:exported="false">
-        </activity>
-        <activity android:name=".PropencityResult"
-            android:exported="false">
-
-        </activity>
+            android:exported="false"></activity>
+        <activity
+            android:name=".PropencityResult"
+            android:exported="false"></activity>
         <activity
             android:name=".SelectDisposition"
-            android:exported="false">
-        </activity>
-        <activity android:name=".PropencityQuestions"
+            android:exported="false"></activity>
+        <activity android:name=".TravelRecord"></activity>
+        <activity
+            android:name=".PropencityQuestions"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

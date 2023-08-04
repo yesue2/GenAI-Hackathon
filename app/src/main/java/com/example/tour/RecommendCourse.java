@@ -1,36 +1,75 @@
 package com.example.tour;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class RecommendCourse extends AppCompatActivity {
+import com.google.gson.Gson;
 
-    private String selectedArea; // 선택된 여행지
-    private String selectedStartDate; // 출발일
-    private String selectedEndDate; // 도착일
-    private String selectedMember; // 여행 구성원
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class RecommendCourse extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend_course);
 
-        // TravelInfo 액티비티로부터 여행 정보를 받아옴
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            selectedArea = extras.getString("selectedArea");
-            selectedStartDate = extras.getString("selectedStartDate");
-            selectedEndDate = extras.getString("selectedEndDate");
-            selectedMember = extras.getString("selectedMember");
-        }
+        List<Course> courses = loadCourseFromGson();
+        Log.d("course", courses.get(0).toString());
+        LinearLayout linearLayout = findViewById(R.id.recommended_Wrapper);
 
-        // 여행 정보를 로그로 출력 (테스트용)
-        Log.d("RecommendCourse", "선택된 지역: " + selectedArea);
-        Log.d("RecommendCourse", "출발일: " + selectedStartDate);
-        Log.d("RecommendCourse", "도착일: " + selectedEndDate);
-        Log.d("RecommendCourse", "구성원: " + selectedMember);
+        for (int i = 0; i < 3; i++){
+            LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View item = layoutInflater.inflate(R.layout.recommend_course_item, null);
+
+            item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(RecommendCourse.this, RecommendCourse2.class);
+                    startActivity(intent);
+                }
+            });
+            linearLayout.addView((item));
+        }
+        Button nextBtn = findViewById(R.id.nextbtn1);
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RecommendCourse.this, TravelRecord.class);
+                startActivity(intent);
+            }
+        });
+
+}
+    private List<Course> loadCourseFromGson() {
+        List<Course> courses = new ArrayList<>();
+        try {
+            InputStream is = getAssets().open("course.json");
+            Reader reader  = new InputStreamReader(is, "UTF-8");
+
+            Gson gson = new Gson();
+            courses = Arrays.asList(gson.fromJson(reader, Course[].class));
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return courses;
     }
 }
 

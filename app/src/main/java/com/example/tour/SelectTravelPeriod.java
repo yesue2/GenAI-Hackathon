@@ -3,6 +3,7 @@ package com.example.tour;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -18,6 +19,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -30,6 +33,8 @@ public class SelectTravelPeriod extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_travel_period);
+        SharedPreferences sharedPreferences = getSharedPreferences("selectTravel",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
         Button startBtn = findViewById(R.id.startDateButton);
         Button endBtn = findViewById(R.id.endDateButton);
@@ -48,7 +53,8 @@ public class SelectTravelPeriod extends AppCompatActivity {
                         calendar.set(year, month, dayOfMonth);
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                         startDate = dateFormat.format(calendar.getTime());
-
+                        editor.putString("startDate", startDate.toString());
+                        editor.commit();
                     }
                 }, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
 
@@ -70,6 +76,8 @@ public class SelectTravelPeriod extends AppCompatActivity {
                         calendar.set(year, month, dayOfMonth);
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                         endDate = dateFormat.format(calendar.getTime());
+                        editor.putString("endDate", endDate.toString());
+                        editor.commit();
                     }
                 }, Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
 

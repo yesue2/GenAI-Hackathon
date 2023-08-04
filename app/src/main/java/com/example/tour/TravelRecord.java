@@ -1,5 +1,6 @@
 package com.example.tour;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,13 +23,16 @@ public class TravelRecord extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 EditText text = findViewById(R.id.editText);
-                Log.d("saved text", text.getText().toString());
-                Toast.makeText(TravelRecord.this, text.getText().toString(),Toast.LENGTH_SHORT);
-                text.setText("");
+                String userAnswer = text.getText().toString();
+                Log.d("saved text", userAnswer);
 
+                Intent intent = new Intent(TravelRecord.this, TravelAlbum.class);
+                intent.putExtra("user_answer", userAnswer);
+                startActivity(intent);
+
+                text.setText("");
             }
         });
-
 
     }
 }

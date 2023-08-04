@@ -57,14 +57,6 @@ public class RecommendCourse extends AppCompatActivity {
             });
             linearLayout.addView((item));
         }
-        Button nextBtn = findViewById(R.id.nextbtn1);
-        nextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(RecommendCourse.this, TravelRecord.class);
-                startActivity(intent);
-            }
-        });
 
 }
     private List<Course> loadCourseFromGson() {

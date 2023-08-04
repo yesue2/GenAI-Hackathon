@@ -72,11 +72,9 @@ public class RecommendCourse extends AppCompatActivity {
         try {
             InputStream is = getAssets().open("course.json");
             Reader reader  = new InputStreamReader(is, "UTF-8");
-            Log.d("reader", reader.toString());
 
             Gson gson = new Gson();
             courses = Arrays.asList(gson.fromJson(reader, Course[].class));
-            Log.d("course", courses.get(0).getName());
 
 
         } catch (IOException e) {

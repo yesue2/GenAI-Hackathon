@@ -11,13 +11,34 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+
 public class TravelRecord extends AppCompatActivity {
+
+    protected Feedback[] feedbacks;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_travel_record);
 
         Button savebtn = findViewById(R.id.record_btn);
+
+        try{
+        InputStream is = getAssets().open("feedback.json");
+        Reader reader = new InputStreamReader(is, "UTF-8");
+        Gson gson = new Gson();
+        feedbacks = gson.fromJson(reader, Feedback[].class);
+        Log.d("feedbacks", feedbacks.toString());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         savebtn.setOnClickListener(new View.OnClickListener() {
             @Override

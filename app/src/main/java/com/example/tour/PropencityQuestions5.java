@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PropencityQuestions extends AppCompatActivity {
+public class PropencityQuestions5 extends AppCompatActivity {
     private int[] answers;
     private List<Integer> selectedOptions = new ArrayList<>();
 
@@ -32,12 +32,20 @@ public class PropencityQuestions extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_propencity_travel);
 
+        double avg1 = getIntent().getDoubleExtra("avg1", 0.0);
+        double avg2 = getIntent().getDoubleExtra("avg2", 0.0);
+        double avg3 = getIntent().getDoubleExtra("avg3", 0.0);
+        double avg4 = getIntent().getDoubleExtra("avg4", 0.0);
+        Log.d("PropencityQuestions4", "avg1: " + avg1);
+        Log.d("PropencityQuestions4", "avg2: " + avg2);
+        Log.d("PropencityQuestions4", "avg3: " + avg3);
+        Log.d("PropencityQuestions4", "avg4: " + avg4);
+
         List<Question> questions = loadQuestionsFromGson();
         LinearLayout linearLayout = findViewById(R.id.question_linearlayout);
 
-
         String[] options = {"매우그렇다","그렇다","보통이다","그렇지않다","매우그렇지않다"};
-        for (int i = 0; i < 5; i++) {
+        for (int i = 20; i < 25; i++) {
             Question question = questions.get(i);
             TextView textView = new TextView(this);
             textView.setText(question.getText());
@@ -56,7 +64,6 @@ public class PropencityQuestions extends AppCompatActivity {
         Button nextBtn = findViewById(R.id.propencity_submit_button);
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 if (allQuestionsAnswered()) {
@@ -65,16 +72,29 @@ public class PropencityQuestions extends AppCompatActivity {
                         sum += (optionIndex + 1);
                     }
                     double average = (double) sum / selectedOptions.size();
-                    Log.d("PropencityQuestions1", "Average: " + average);
+                    Log.d("PropencityQuestions5", "Average: " + average);
 
-                    Intent intent = new Intent(PropencityQuestions.this, PropencityQuestions2.class);
-                    intent.putExtra("avg1", average);
+                    String avg1Status = getAverageStatus(avg1);
+                    String avg2Status = getAverageStatus(avg2);
+                    String avg3Status = getAverageStatus(avg3);
+                    String avg4Status = getAverageStatus(avg4);
+                    String avg5Status = getAverageStatus(average);
+
+                    Log.d("PropencityQuestions5", "avg1Status: " + avg1Status);
+                    Log.d("PropencityQuestions5", "avg2Status: " + avg2Status);
+                    Log.d("PropencityQuestions5", "avg3Status: " + avg3Status);
+                    Log.d("PropencityQuestions5", "avg4Status: " + avg4Status);
+                    Log.d("PropencityQuestions5", "avg5Status: " + avg5Status);
+
+
+                    Intent intent = new Intent(PropencityQuestions5.this, PropencityResult.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(PropencityQuestions.this, "모든 질문에 답변해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PropencityQuestions5.this, "모든 질문에 답변해주세요.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
     }
 
     private boolean allQuestionsAnswered() {
@@ -97,11 +117,12 @@ public class PropencityQuestions extends AppCompatActivity {
         return true;
     }
 
+
     private List<Question> loadQuestionsFromGson() {
         List<Question> questions = new ArrayList<>();
         try {
             InputStream is = getAssets().open("question.json");
-            Reader reader  = new InputStreamReader(is, "UTF-8");
+            Reader reader = new InputStreamReader(is, "UTF-8");
 
             Gson gson = new Gson();
             questions = Arrays.asList(gson.fromJson(reader, Question[].class));
@@ -112,6 +133,12 @@ public class PropencityQuestions extends AppCompatActivity {
         }
         return questions;
     }
+
+    private String getAverageStatus(double avg) {
+        if (avg >= 3.0) {
+            return "high";
+        } else {
+            return "low";
+        }
+    }
 }
-
-

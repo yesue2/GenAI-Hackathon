@@ -1,15 +1,17 @@
 package com.example.tour;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class Course {
 
     private int id;
     private String image;
+    private String name;
     private String hashtag;
     private List<Information> infomation;
 
-    protected static class Information {
+    protected static class Information implements Serializable {
         private String day;
         private String morning;
         private String afternoon;
@@ -26,14 +28,11 @@ public class Course {
         }
     }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() {return id;}
 
-    public String getImage() {
+    public String getName() {return name;}
 
-        return image;
-    }
+    public String getImage() {return image;}
 
     public String getHashtag() {
         return hashtag;

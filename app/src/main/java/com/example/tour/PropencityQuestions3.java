@@ -24,7 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PropencityQuestions3 extends AppCompatActivity {
-    private int[] answers;
+    private int[] extraversion = new int[5];
     private List<Integer> selectedOptions = new ArrayList<>();
 
     @Override
@@ -32,10 +32,10 @@ public class PropencityQuestions3 extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_propencity_travel);
 
-        double avg1 = getIntent().getDoubleExtra("avg1", 0.0);
-        double avg2 = getIntent().getDoubleExtra("avg2", 0.0);
-        Log.d("PropencityQuestions3", "avg1: " + avg1);
-        Log.d("PropencityQuestions3", "avg2: " + avg2);
+        String opennessJson = getIntent().getStringExtra("opennessJson");
+        String conscientiousnessJson = getIntent().getStringExtra("conscientiousnessJson");
+        Log.d("PropencityQuestions3", "opennessJson" + opennessJson);
+        Log.d("PropencityQuestions3", "opennessJson" + conscientiousnessJson);
 
         List<Question> questions = loadQuestionsFromGson();
         LinearLayout linearLayout = findViewById(R.id.question_linearlayout);
@@ -64,17 +64,17 @@ public class PropencityQuestions3 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (allQuestionsAnswered()) {
-                    int sum = 0;
-                    for (int optionIndex : selectedOptions) {
-                        sum += (optionIndex + 1);
+                    for (int i = 0; i < selectedOptions.size(); i++) {
+                        extraversion[i] = selectedOptions.get(i) + 1;
                     }
-                    double average = (double) sum / selectedOptions.size();
-                    Log.d("PropencityQuestions3", "Average: " + average);
+
+                    Gson gson = new Gson();
+                    String extraversionJson = gson.toJson(extraversion);
 
                     Intent intent = new Intent(PropencityQuestions3.this, PropencityQuestions4.class);
-                    intent.putExtra("avg1", avg1);
-                    intent.putExtra("avg2", avg2);
-                    intent.putExtra("avg3", average);
+                    intent.putExtra("opennessJson", opennessJson);
+                    intent.putExtra("conscientiousnessJson", conscientiousnessJson);
+                    intent.putExtra("extraversionJson", extraversionJson);
                     startActivity(intent);
                 } else {
                     Toast.makeText(PropencityQuestions3.this, "모든 질문에 답변해주세요.", Toast.LENGTH_SHORT).show();

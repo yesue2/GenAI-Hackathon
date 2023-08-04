@@ -24,7 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PropencityQuestions extends AppCompatActivity {
-    private int[] answers;
+    private int[] openness = new int[5];
     private List<Integer> selectedOptions = new ArrayList<>();
 
     @Override
@@ -56,19 +56,18 @@ public class PropencityQuestions extends AppCompatActivity {
         Button nextBtn = findViewById(R.id.propencity_submit_button);
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 if (allQuestionsAnswered()) {
-                    int sum = 0;
-                    for (int optionIndex : selectedOptions) {
-                        sum += (optionIndex + 1);
+                    for (int i = 0; i < selectedOptions.size(); i++) {
+                        openness[i] = selectedOptions.get(i) + 1;
                     }
-                    double average = (double) sum / selectedOptions.size();
-                    Log.d("PropencityQuestions1", "Average: " + average);
+
+                    Gson gson = new Gson();
+                    String opennessJson = gson.toJson(openness);
 
                     Intent intent = new Intent(PropencityQuestions.this, PropencityQuestions2.class);
-                    intent.putExtra("avg1", average);
+                    intent.putExtra("opennessJson", opennessJson);
                     startActivity(intent);
                 } else {
                     Toast.makeText(PropencityQuestions.this, "모든 질문에 답변해주세요.", Toast.LENGTH_SHORT).show();

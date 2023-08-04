@@ -24,7 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PropencityQuestions2 extends AppCompatActivity {
-    private int[] answers;
+    private int[] conscientiousness = new int[5];
     private List<Integer> selectedOptions = new ArrayList<>();
 
     @Override
@@ -32,7 +32,8 @@ public class PropencityQuestions2 extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_propencity_travel);
 
-        double avg1 = getIntent().getDoubleExtra("avg1", 0.0);
+        String opennessJson = getIntent().getStringExtra("opennessJson");
+        Log.d("PropencityQuestions2", "opennessJson" + opennessJson);
 
         List<Question> questions = loadQuestionsFromGson();
         LinearLayout linearLayout = findViewById(R.id.question_linearlayout);
@@ -61,16 +62,16 @@ public class PropencityQuestions2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (allQuestionsAnswered()) {
-                    int sum = 0;
-                    for (int optionIndex : selectedOptions) {
-                        sum += (optionIndex + 1);
+                    for (int i = 0; i < selectedOptions.size(); i++) {
+                        conscientiousness[i] = selectedOptions.get(i) + 1;
                     }
-                    double average = (double) sum / selectedOptions.size();
-                    Log.d("PropencityQuestions2", "Average: " + average);
+
+                    Gson gson = new Gson();
+                    String conscientiousnessJson = gson.toJson(conscientiousness);
 
                     Intent intent = new Intent(PropencityQuestions2.this, PropencityQuestions3.class);
-                    intent.putExtra("avg1", avg1);
-                    intent.putExtra("avg2", average);
+                    intent.putExtra("opennessJson", opennessJson);
+                    intent.putExtra("conscientiousnessJson", conscientiousnessJson);
                     startActivity(intent);
                 } else {
                     Toast.makeText(PropencityQuestions2.this, "모든 질문에 답변해주세요.", Toast.LENGTH_SHORT).show();

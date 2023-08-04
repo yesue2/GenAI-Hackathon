@@ -7,9 +7,11 @@ import retrofit2.http.POST;
 public interface Api {
     //여행 성향
     @POST("/travel_personality")
-    Call<PersonalityResponse> getTravelPersonality(@Body PersonalityRequest request);
+    Call<PersonalityResponse> getTravelPersonality(
+            @Body PersonalityRequest request);
 
     //추천 여행지
     @POST("/travel_suggestions")
-    Call<RecommendResponse> getTravelRecommend(@Body RecommendRequest request);
+    Call<RecommendResponse> getTravelRecommend(
+            @Body RecommendRequest request);
 }

@@ -9,6 +9,8 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tour.data.PersonalityResponse;
+
 public class PropencityResult extends AppCompatActivity {
 
     @Override
@@ -18,6 +20,11 @@ public class PropencityResult extends AppCompatActivity {
         setContentView(R.layout.activity_propencity_result);
 
         Button nextBtn = findViewById(R.id.pp_result_next_button);
+
+        Intent intent = getIntent();
+        PersonalityResponse character = (PersonalityResponse) intent.getSerializableExtra("character");
+        PersonalityResponse travelPreferences = (PersonalityResponse) intent.getSerializableExtra("travelPreferences");
+
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override

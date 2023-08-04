@@ -72,7 +72,7 @@ public class SelectTravelMember extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                Intent intent = new Intent(SelectTravelMember.this, SelectTravelMember.class);
+                Intent intent = new Intent(SelectTravelMember.this, RecommendCourse.class);
                 startActivity(intent);
             }
         });

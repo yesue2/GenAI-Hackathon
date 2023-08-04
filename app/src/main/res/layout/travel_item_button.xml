@@ -2,14 +2,16 @@
 <RadioButton
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/select_travel_1"
-    android:layout_width="128dp"
-    android:layout_height="65dp"
-    android:layout_margin="16dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingVertical="10dp"
+    android:paddingHorizontal="40dp"
+    android:layout_marginVertical="10dp"
+    android:layout_marginHorizontal="2dp"
     android:text="지역"
-    android:textColor="#808080"
+    android:textColor="@drawable/radio_travel_text_color"
     android:textStyle="bold"
-    android:gravity="center"
     android:button="@drawable/toggle_background"
-    android:background="@drawable/radio_button_background_blue"
+    android:background="@drawable/radio_travel_seletor"
 
     />

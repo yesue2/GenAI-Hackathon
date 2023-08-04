@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,16 +33,25 @@ public class RecommendCourse extends AppCompatActivity {
 
         List<Course> courses = loadCourseFromGson();
         Log.d("course", courses.get(0).toString());
+
         LinearLayout linearLayout = findViewById(R.id.recommended_Wrapper);
 
-        for (int i = 0; i < 3; i++){
+        for (Course course : courses){
             LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View item = layoutInflater.inflate(R.layout.recommend_course_item, null);
+            TextView titleNumber =  item.findViewById(R.id.title_number);
+            TextView title = item.findViewById(R.id.recommended_title);
+            TextView hashtag = item.findViewById(R.id.recommended_subtitle);
+            titleNumber.setText(String.valueOf(course.getId()));
+            title.setText(course.getName());
+            hashtag.setText(course.getHashtag());
+
 
             item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(RecommendCourse.this, RecommendCourse2.class);
+                    intent.putExtra("information", (Serializable) course.getInfomation());
                     startActivity(intent);
                 }
             });

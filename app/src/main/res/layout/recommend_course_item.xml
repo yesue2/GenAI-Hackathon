@@ -11,7 +11,7 @@
     >
 
     <TextView
-        android:id="@+id/title_number_1"
+        android:id="@+id/title_number"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -24,7 +24,7 @@
         ></TextView>
 
     <ImageView
-        android:id="@+id/thumbnail_image_1"
+        android:id="@+id/thumbnail_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:src="@drawable/button_rounded_area"
@@ -34,7 +34,7 @@
         ></ImageView>
 
     <LinearLayout
-        android:id="@+id/text_wrapper_1"
+        android:id="@+id/text_wrapper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="99"
@@ -44,7 +44,7 @@
         >
 
         <TextView
-            android:id="@+id/recommended_title_1"
+            android:id="@+id/recommended_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="근처공원"
@@ -54,7 +54,7 @@
             ></TextView>
 
         <TextView
-            android:id="@+id/recommended_subtitle_1"
+            android:id="@+id/recommended_subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="#걷기좋은 #가족끼리"

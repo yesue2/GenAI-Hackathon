@@ -34,23 +34,46 @@
             android:exported="false" />
         <activity
             android:name=".PropencityQuestions2"
-            android:exported="false"></activity>
+            android:exported="false">
+
+        </activity>
         <activity
             android:name=".PropencityQuestions3"
-            android:exported="false"></activity>
+            android:exported="false">
+
+        </activity>
         <activity
             android:name=".PropencityQuestions4"
-            android:exported="false"></activity>
+            android:exported="false">
+
+        </activity>
         <activity
             android:name=".PropencityQuestions5"
-            android:exported="false"></activity>
+            android:exported="false">
+
+        </activity>
         <activity
             android:name=".PropencityResult"
-            android:exported="false"></activity>
+            android:exported="false">
+
+        </activity>
         <activity
             android:name=".SelectDisposition"
-            android:exported="false"></activity>
-        <activity android:name=".TravelRecord"></activity>
+            android:exported="false">
+
+        </activity>
+        <activity
+            android:name=".TravelRecord"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".TravelAlbum"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".RecommendNextTravel"
+            android:exported="false">
+        </activity>
         <activity
             android:name=".PropencityQuestions"
             android:exported="true">

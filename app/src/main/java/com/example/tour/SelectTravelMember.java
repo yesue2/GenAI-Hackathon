@@ -21,6 +21,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class SelectTravelMember extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -28,6 +37,20 @@ public class SelectTravelMember extends AppCompatActivity {
         setContentView(R.layout.activity_select_travel_member);
         SharedPreferences sharedPreferences = getSharedPreferences("selectTravel",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(10, TimeUnit.MINUTES) // 연결 타임아웃
+                .readTimeout(10, TimeUnit.MINUTES) // 읽기 타임아웃
+                .writeTimeout(10, TimeUnit.MINUTES) // 쓰기 타임아웃
+                .build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://t-api-play.actionfriends.net/api/v1/")
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        TravelService service = retrofit.create(TravelService.class);
 
         RadioGroup dispositionRadioGroup = findViewById(R.id.dispositionRadioGroup);
         dispositionRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -58,22 +81,39 @@ public class SelectTravelMember extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject();
                 String area = sharedPreferences.getString("area", "default Area");
                 String member = sharedPreferences.getString("member", "default member");
-                String startDate = sharedPreferences.getString("startDate", "default startDate");
-                String endDate = sharedPreferences.getString("endDate", "default endDate");
+                int day = Integer.parseInt(sharedPreferences.getString("day", "default startDate"));
+                String travelPreferences = sharedPreferences.getString("travelPreferences", "default endDate");
                 try{
-                    jsonObject.put("area", area);
-                    jsonObject.put("member", member);
-                    jsonObject.put("startDate", startDate);
-                    jsonObject.put("endDate", endDate);
+                    jsonObject.put("desiredLocation", area);
+                    jsonObject.put("travelType", member);
+                    jsonObject.put("travelDuration",day);
+                    jsonObject.put("travelPreferences", travelPreferences);
 
-                    String result = jsonObject.toString();
-                    Log.d("result", result);
+                    Call<Void> call = service.sandTravelData(jsonObject);
+                    call.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            if (response.isSuccessful()) {
+                                Log.d("Retrofit", "Data sent susccessfully");
+                                Log.d("Retrofit", response.toString());
+                                //Intent intent = new Intent(SelectTravelMember.this, RecommendCourse.class);
+
+                                //startActivity(intent);
+                            } else {
+                                Log.d("Retrofit", "Data not sent");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Log.d("Retrofit", "Error: " + t.getMessage());
+                        }
+                    });
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                Intent intent = new Intent(SelectTravelMember.this, RecommendCourse.class);
-                startActivity(intent);
+
             }
         });
         @SuppressLint({"MissingInflatedId", "LocalSuppress"})

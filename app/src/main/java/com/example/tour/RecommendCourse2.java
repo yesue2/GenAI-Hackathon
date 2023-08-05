@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -31,6 +33,15 @@ public class RecommendCourse2 extends AppCompatActivity {
             Log.d("Information", "Information is null");
         }
 
+        Button button = findViewById(R.id.course2_nextbutton);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RecommendCourse2.this, TravelRecord.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }

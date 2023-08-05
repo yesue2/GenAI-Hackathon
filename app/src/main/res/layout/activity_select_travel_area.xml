@@ -34,22 +34,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ic_travel_destination"
         tools:ignore="MissingConstraints" />
+
+    <!-- 다음 버튼 -->
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="350dp"
         app:layout_constraintBottom_toTopOf="@+id/nextButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_selectMember"
-        app:layout_constraintVertical_bias="0.139">
+        app:layout_constraintVertical_bias="1.0">
+
         <com.google.android.flexbox.FlexboxLayout
             android:id="@+id/flexboxLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:flexWrap="wrap" />
+            android:layout_gravity="top"
+            app:flexWrap="wrap"
+            app:justifyContent="center"
+            app:layout_constraintHorizontal_bias="0.54" />
     </ScrollView>
-    <!-- 다음 버튼 -->
+
     <Button
         android:id="@+id/nextButton"
         style="@style/ThickButtonStyle"
@@ -58,7 +65,7 @@
         android:layout_margin="16dp"
         android:background="@drawable/button_rounded_background"
         android:gravity="center"
-        android:text="다음"
+        android:text="@string/next_button"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

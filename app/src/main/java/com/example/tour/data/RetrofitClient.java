@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
     private static Retrofit retrofit;
-    private static final String BASE_URL = "https://t-api-play.actionfriends.net/api/v1/hackathon2023";
+    private static final String BASE_URL = "https://t-api-play.actionfriends.net/api/v1/hackathon2023/";
 
     public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.gson.Gson;
 
@@ -63,11 +64,14 @@ public class PropencityQuestions extends AppCompatActivity {
                         openness[i] = selectedOptions.get(i) + 1;
                     }
 
-                    Gson gson = new Gson();
-                    String opennessJson = gson.toJson(openness);
+                    AnswerModel viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(AnswerModel.class);
+                    viewModel.setOpennessData(openness);
+                    int[] opennessData = viewModel.getOpennessData().getValue();
+                    if (opennessData != null) {
+                        Log.d("PropencityQuestions", "Openness data: " + Arrays.toString(opennessData));
+                    }
 
                     Intent intent = new Intent(PropencityQuestions.this, PropencityQuestions2.class);
-                    intent.putExtra("opennessJson", opennessJson);
                     startActivity(intent);
                 } else {
                     Toast.makeText(PropencityQuestions.this, "모든 질문에 답변해주세요.", Toast.LENGTH_SHORT).show();

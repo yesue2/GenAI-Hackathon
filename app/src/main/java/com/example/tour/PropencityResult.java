@@ -21,9 +21,8 @@ public class PropencityResult extends AppCompatActivity {
 
         Button nextBtn = findViewById(R.id.pp_result_next_button);
 
-        Intent intent = getIntent();
-        PersonalityResponse character = (PersonalityResponse) intent.getSerializableExtra("character");
-        PersonalityResponse travelPreferences = (PersonalityResponse) intent.getSerializableExtra("travelPreferences");
+        String character = getIntent().getStringExtra("character");
+        String travelPreferences = getIntent().getStringExtra("travelPreferences");
 
 
         nextBtn.setOnClickListener(new View.OnClickListener() {

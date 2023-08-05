@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.gson.Gson;
 
@@ -31,9 +32,6 @@ public class PropencityQuestions2 extends AppCompatActivity {
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_propencity_travel);
-
-        String opennessJson = getIntent().getStringExtra("opennessJson");
-        Log.d("PropencityQuestions2", "opennessJson" + opennessJson);
 
         List<Question> questions = loadQuestionsFromGson();
         LinearLayout linearLayout = findViewById(R.id.question_linearlayout);
@@ -66,12 +64,14 @@ public class PropencityQuestions2 extends AppCompatActivity {
                         conscientiousness[i] = selectedOptions.get(i) + 1;
                     }
 
-                    Gson gson = new Gson();
-                    String conscientiousnessJson = gson.toJson(conscientiousness);
+                    AnswerModel viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(AnswerModel.class);
+                    viewModel.setConscientiousnessData(conscientiousness);
+                    int[] conscientiousnessData = viewModel.getConscientiousnessData().getValue();
+                    if (conscientiousnessData != null) {
+                        Log.d("PropencityQuestions2", "conscientiousness data: " + Arrays.toString(conscientiousnessData));
+                    }
 
                     Intent intent = new Intent(PropencityQuestions2.this, PropencityQuestions3.class);
-                    intent.putExtra("opennessJson", opennessJson);
-                    intent.putExtra("conscientiousnessJson", conscientiousnessJson);
                     startActivity(intent);
                 } else {
                     Toast.makeText(PropencityQuestions2.this, "모든 질문에 답변해주세요.", Toast.LENGTH_SHORT).show();

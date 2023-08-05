@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.gson.Gson;
 
@@ -31,13 +32,6 @@ public class PropencityQuestions4 extends AppCompatActivity {
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_propencity_travel);
-
-        String opennessJson = getIntent().getStringExtra("opennessJson");
-        String conscientiousnessJson = getIntent().getStringExtra("conscientiousnessJson");
-        String extraversionJson = getIntent().getStringExtra("extraversionJson");
-        Log.d("PropencityQuestions4", "opennessJson" + opennessJson);
-        Log.d("PropencityQuestions4", "opennessJson" + conscientiousnessJson);
-        Log.d("PropencityQuestions4", "extraversionJson" + extraversionJson);
 
         List<Question> questions = loadQuestionsFromGson();
         LinearLayout linearLayout = findViewById(R.id.question_linearlayout);
@@ -70,14 +64,14 @@ public class PropencityQuestions4 extends AppCompatActivity {
                         agreeableness[i] = selectedOptions.get(i) + 1;
                     }
 
-                    Gson gson = new Gson();
-                    String agreeablenessJson = gson.toJson(agreeableness);
+                    AnswerModel viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(AnswerModel.class);
+                    viewModel.setAgreeablenessData(agreeableness);
+                    int[] agreeablenessData = viewModel.getAgreeablenessData().getValue();
+                    if (agreeablenessData != null) {
+                        Log.d("PropencityQuestions4", "agreeableness data: " + Arrays.toString(agreeablenessData));
+                    }
 
                     Intent intent = new Intent(PropencityQuestions4.this, PropencityQuestions5.class);
-                    intent.putExtra("opennessJson", opennessJson);
-                    intent.putExtra("conscientiousnessJson", conscientiousnessJson);
-                    intent.putExtra("extraversionJson", extraversionJson);
-                    intent.putExtra("agreeablenessJson", agreeablenessJson);
                     startActivity(intent);
                 } else {
                     Toast.makeText(PropencityQuestions4.this, "모든 질문에 답변해주세요.", Toast.LENGTH_SHORT).show();

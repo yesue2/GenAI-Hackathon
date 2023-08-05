@@ -74,6 +74,7 @@
             android:name=".RecommendNextTravel"
             android:exported="false">
         </activity>
+
         <activity
             android:name=".PropencityQuestions"
             android:exported="true">

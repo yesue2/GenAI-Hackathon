@@ -12,12 +12,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tour.data.Api;
 import com.example.tour.data.PersonalityRequest;
 import com.example.tour.data.PersonalityResponse;
 import com.example.tour.data.RetrofitClient;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,26 +38,15 @@ import retrofit2.Response;
 public class PropencityQuestions5 extends AppCompatActivity {
     private int[] neuroticism = new int[5];
     private List<Integer> selectedOptions = new ArrayList<>();
+    private AnswerModel viewModel;
+
 
     @Override
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_propencity_travel);
 
-        String opennessJson = getIntent().getStringExtra("opennessJson");
-        String conscientiousnessJson = getIntent().getStringExtra("conscientiousnessJson");
-        String extraversionJson = getIntent().getStringExtra("extraversionJson");
-        String agreeablenessJson = getIntent().getStringExtra("agreeablenessJson");
-        Log.d("PropencityQuestions5", "opennessJson" + opennessJson);
-        Log.d("PropencityQuestions5", "opennessJson" + conscientiousnessJson);
-        Log.d("PropencityQuestions5", "extraversionJson" + extraversionJson);
-        Log.d("PropencityQuestions5", "agreeablenessJson" + agreeablenessJson);
-
-        Gson gson = new Gson();
-        PersonalityRequest opennessRequest = gson.fromJson(opennessJson, PersonalityRequest.class);
-        PersonalityRequest conscientiousnessRequest = gson.fromJson(conscientiousnessJson, PersonalityRequest.class);
-        PersonalityRequest extraversionRequest = gson.fromJson(extraversionJson, PersonalityRequest.class);
-        PersonalityRequest agreeablenessRequest = gson.fromJson(agreeablenessJson, PersonalityRequest.class);
+        viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(AnswerModel.class);
 
 
         List<Question> questions = loadQuestionsFromGson();
@@ -87,39 +79,15 @@ public class PropencityQuestions5 extends AppCompatActivity {
                         neuroticism[i] = selectedOptions.get(i) + 1;
                     }
 
-                    PersonalityRequest request = new PersonalityRequest();
+                    viewModel.setNeuroticismData(neuroticism);
+                    int[] neuroticismData = viewModel.getNeuroticismData().getValue();
+                    if (neuroticismData != null) {
+                        Log.d("PropencityQuestions5", "neuroticism data: " + Arrays.toString(neuroticismData));
+                    }
 
-                    request.setOpenness1(opennessRequest.getOpenness1());
-                    request.setOpenness2(opennessRequest.getOpenness2());
-                    request.setOpenness3(opennessRequest.getOpenness3());
-                    request.setOpenness4(opennessRequest.getOpenness4());
-                    request.setOpenness5(opennessRequest.getOpenness5());
-
-                    request.setConscientiousness1(conscientiousnessRequest.getConscientiousness1());
-                    request.setConscientiousness2(conscientiousnessRequest.getConscientiousness2());
-                    request.setConscientiousness3(conscientiousnessRequest.getConscientiousness3());
-                    request.setConscientiousness4(conscientiousnessRequest.getConscientiousness4());
-                    request.setConscientiousness5(conscientiousnessRequest.getConscientiousness5());
-
-                    request.setExtraversion1(extraversionRequest.getExtraversion1());
-                    request.setExtraversion2(extraversionRequest.getExtraversion2());
-                    request.setExtraversion3(extraversionRequest.getExtraversion3());
-                    request.setExtraversion4(extraversionRequest.getExtraversion4());
-                    request.setExtraversion5(extraversionRequest.getExtraversion5());
-
-                    request.setAgreeableness1(agreeablenessRequest.getAgreeableness1());
-                    request.setAgreeableness2(agreeablenessRequest.getAgreeableness2());
-                    request.setAgreeableness3(agreeablenessRequest.getAgreeableness3());
-                    request.setAgreeableness4(agreeablenessRequest.getAgreeableness4());
-                    request.setAgreeableness5(agreeablenessRequest.getAgreeableness5());
-
-                    request.setNeuroticism1(neuroticism[0]);
-                    request.setNeuroticism2(neuroticism[1]);
-                    request.setNeuroticism3(neuroticism[2]);
-                    request.setNeuroticism4(neuroticism[3]);
-                    request.setNeuroticism5(neuroticism[4]);
-
-                    sendDataToServer(request);
+                    sendDataToServer();
+                    Intent intent = new Intent(PropencityQuestions5.this, PropencityResult.class);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(PropencityQuestions5.this, "모든 질문에 답변해주세요.", Toast.LENGTH_SHORT).show();
                 }
@@ -157,8 +125,7 @@ public class PropencityQuestions5 extends AppCompatActivity {
             Reader reader = new InputStreamReader(is, "UTF-8");
 
             Gson gson = new Gson();
-            questions = Arrays.asList(gson.fromJson(reader, Question[].class));
-
+            questions = gson.fromJson(reader, new TypeToken<List<Question>>() {}.getType());
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -166,32 +133,85 @@ public class PropencityQuestions5 extends AppCompatActivity {
         return questions;
     }
 
-    String character = "";
-    String travelPreferences ="";
-    private void sendDataToServer(PersonalityRequest request) {
+
+    private void sendDataToServer() {
+        // ViewModel에서 데이터를 가져오기
+        int[] opennessData = viewModel.getOpennessData().getValue();
+        int[] conscientiousnessData = viewModel.getConscientiousnessData().getValue();
+        int[] extraversionData = viewModel.getExtraversionData().getValue();
+        int[] agreeablenessData = viewModel.getAgreeablenessData().getValue();
+        int[] neuroticismData = viewModel.getNeuroticismData().getValue();
+
+        Log.d("PropencityQuestions5", "Openness data: " + Arrays.toString(opennessData));
+        Log.d("PropencityQuestions5", "Conscientiousness data: " + Arrays.toString(conscientiousnessData));
+        Log.d("PropencityQuestions5", "Extraversion data: " + Arrays.toString(extraversionData));
+        Log.d("PropencityQuestions5", "Agreeableness data: " + Arrays.toString(agreeablenessData));
+        Log.d("PropencityQuestions5", "Neuroticism data: " + Arrays.toString(neuroticismData));
+
+
+        if (opennessData == null || conscientiousnessData == null || extraversionData == null
+                || agreeablenessData == null || neuroticismData == null) {
+            Toast.makeText(PropencityQuestions5.this, "데이터가 올바르지 않습니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+        // 데이터를 이용하여 PersonalityRequest 객체 생성 및 API 호출
+        PersonalityRequest request = new PersonalityRequest();
+        request.setOpenness1(opennessData[0]);
+        request.setOpenness2(opennessData[1]);
+        request.setOpenness3(opennessData[2]);
+        request.setOpenness4(opennessData[3]);
+        request.setOpenness5(opennessData[4]);
+
+        request.setConscientiousness1(conscientiousnessData[0]);
+        request.setConscientiousness2(conscientiousnessData[1]);
+        request.setConscientiousness3(conscientiousnessData[2]);
+        request.setConscientiousness4(conscientiousnessData[3]);
+        request.setConscientiousness5(conscientiousnessData[4]);
+
+        request.setExtraversion1(extraversionData[0]);
+        request.setExtraversion2(extraversionData[1]);
+        request.setExtraversion3(extraversionData[2]);
+        request.setExtraversion4(extraversionData[3]);
+        request.setExtraversion5(extraversionData[4]);
+
+        request.setAgreeableness1(agreeablenessData[0]);
+        request.setAgreeableness2(agreeablenessData[1]);
+        request.setAgreeableness3(agreeablenessData[2]);
+        request.setAgreeableness4(agreeablenessData[3]);
+        request.setAgreeableness5(agreeablenessData[4]);
+
+        request.setNeuroticism1(neuroticismData[0]);
+        request.setNeuroticism2(neuroticismData[1]);
+        request.setNeuroticism3(neuroticismData[2]);
+        request.setNeuroticism4(neuroticismData[3]);
+        request.setNeuroticism5(neuroticismData[4]);
+
         Api api = RetrofitClient.getRetrofitInstance().create(Api.class);
         Call<PersonalityResponse> call = api.getTravelPersonality(request);
+
         call.enqueue(new Callback<PersonalityResponse>() {
             @Override
-            public void onResponse(
-                    Call<PersonalityResponse> call,
-                    Response<PersonalityResponse> response) {
+            public void onResponse(Call<PersonalityResponse> call, Response<PersonalityResponse> response) {
                 if (response.isSuccessful()) {
-                    character = response.body().toString();
-                    travelPreferences = response.body().toString();
+                    PersonalityResponse personalityResponse = response.body();
+
+                    String character = personalityResponse.getCharacter();
+                    String travelPreferences = personalityResponse.getTravelPreferences();
+
                     Intent intent = new Intent(PropencityQuestions5.this, PropencityResult.class);
                     intent.putExtra("character", character);
                     intent.putExtra("travelPreferences", travelPreferences);
-
                     startActivity(intent);
-                } else {
                 }
             }
 
             @Override
             public void onFailure(Call<PersonalityResponse> call, Throwable t) {
-                Log.d("PropencityQuestions5", "getTravelPersonality" + t);
+                Log.d("PropencityQuestions5", "responseFailed" + t);
             }
         });
     }
+
 }

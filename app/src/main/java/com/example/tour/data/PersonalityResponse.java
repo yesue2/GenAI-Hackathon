@@ -26,4 +26,42 @@ public class PersonalityResponse {
 
     @SerializedName("travelPreferences")
     private String travelPreferences;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getOpenness() {
+        return openness;
+    }
+
+    public String getConscientiousness() {
+        return conscientiousness;
+    }
+
+    public String getExtraversion() {
+        return extraversion;
+    }
+
+    public String getAgreeableness() {
+        return agreeableness;
+    }
+
+    public String getNeuroticism() {
+        return neuroticism;
+    }
+
+    public String getCharacter() {
+        return character;
+    }
+    public void setCharacter(String character) {
+        this.character = character;
+    }
+
+    public String getTravelPreferences() {
+        return travelPreferences;
+    }
+    public void setTravelPreferences(String travelPreferences) {
+        this.travelPreferences = travelPreferences;
+    }
 }

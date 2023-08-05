@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.gson.Gson;
 
@@ -31,11 +32,6 @@ public class PropencityQuestions3 extends AppCompatActivity {
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_propencity_travel);
-
-        String opennessJson = getIntent().getStringExtra("opennessJson");
-        String conscientiousnessJson = getIntent().getStringExtra("conscientiousnessJson");
-        Log.d("PropencityQuestions3", "opennessJson" + opennessJson);
-        Log.d("PropencityQuestions3", "opennessJson" + conscientiousnessJson);
 
         List<Question> questions = loadQuestionsFromGson();
         LinearLayout linearLayout = findViewById(R.id.question_linearlayout);
@@ -68,13 +64,14 @@ public class PropencityQuestions3 extends AppCompatActivity {
                         extraversion[i] = selectedOptions.get(i) + 1;
                     }
 
-                    Gson gson = new Gson();
-                    String extraversionJson = gson.toJson(extraversion);
+                    AnswerModel viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(AnswerModel.class);
+                    viewModel.setExtraversionData(extraversion);
+                    int[] extraversionData = viewModel.getExtraversionData().getValue();
+                    if (extraversionData != null) {
+                        Log.d("PropencityQuestions3", "extraversion data: " + Arrays.toString(extraversionData));
+                    }
 
                     Intent intent = new Intent(PropencityQuestions3.this, PropencityQuestions4.class);
-                    intent.putExtra("opennessJson", opennessJson);
-                    intent.putExtra("conscientiousnessJson", conscientiousnessJson);
-                    intent.putExtra("extraversionJson", extraversionJson);
                     startActivity(intent);
                 } else {
                     Toast.makeText(PropencityQuestions3.this, "모든 질문에 답변해주세요.", Toast.LENGTH_SHORT).show();

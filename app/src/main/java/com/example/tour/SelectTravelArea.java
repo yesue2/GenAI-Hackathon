@@ -39,11 +39,12 @@ public class SelectTravelArea extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_travel_area);
-        //여행기본정보 페이지 1번
+
         SharedPreferences sharedPreferences = getSharedPreferences("selectTravel",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+
+
         // string 배열만큼 버튼 생성
-        String[] radioBtnGroup = {"서울","부산","대구","인천","광주","대전","울산","세종"};
         List<CurrentTrip> tripGroups = loadCurrentTripFromGson();
         FlexboxLayout flexboxLayout = findViewById(R.id.flexboxLayout);
         AtomicReference<RadioButton> checkedRadioButton = new AtomicReference<>();
@@ -67,10 +68,6 @@ public class SelectTravelArea extends AppCompatActivity {
                         }
                         checkedRadioButton.set(radioButton);
                         TravelArea = checkedRadioButton.get().getText().toString();
-                        Log.d("toString", TravelArea);
-                        //todo: id 혹은 고유값을 받아서 저장되어야됨
-                        editor.putString("area", checkedRadioButton.get().getText().toString());
-                        editor.commit();
                     }
                 }
             });
@@ -93,8 +90,10 @@ public class SelectTravelArea extends AppCompatActivity {
             public void onClick(View v) {
 
                     if(Objects.equals(TravelArea, "세종특별자치시")){
-                    Intent intent = new Intent(SelectTravelArea.this, SelectTravelPeriod.class);
-                    startActivity(intent);
+                        editor.putString("area", "세종특별자치시");
+                        editor.commit();
+                        Intent intent = new Intent(SelectTravelArea.this, SelectTravelPeriod.class);
+                        startActivity(intent);
                     }
                     else{
                         Intent intent = new Intent(SelectTravelArea.this, SelectTravelArea2.class);

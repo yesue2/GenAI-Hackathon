@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,6 +31,9 @@ public class SelectTravelPeriod extends AppCompatActivity {
     protected String startDate;
     protected String endDate;
     protected int curYear, curMonth, curDay;
+
+    protected Date startDay = null;
+    protected Date endDay = null;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -94,6 +98,7 @@ public class SelectTravelPeriod extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+
         @SuppressLint({"MissingInflatedId", "LocalSuppress"})
         TextView tv = findViewById(R.id.tv_selectPeriod);
         String text = tv.getText().toString();
@@ -109,8 +114,26 @@ public class SelectTravelPeriod extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SelectTravelPeriod.this, SelectTravelMember.class);
-                startActivity(intent);
+                try {
+                    if( startDate != null & endDate != null){
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                        startDay = dateFormat.parse(startDate);
+                        endDay = dateFormat.parse(endDate);
+
+                        long diff = endDay.getTime() - startDay.getTime();
+                        long diffDays = diff / (24 * 60 * 60 * 1000);
+                        Log.d("days", String.valueOf(diffDays));
+
+                        editor.putString("day", String.valueOf(diffDays));
+                        editor.commit();
+
+                        Intent intent = new Intent(SelectTravelPeriod.this, SelectTravelMember.class);
+                        startActivity(intent);
+                    }
+
+                } catch(ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
         @SuppressLint({"MissingInflatedId", "LocalSuppress"})

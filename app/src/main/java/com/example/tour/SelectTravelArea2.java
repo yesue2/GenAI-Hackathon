@@ -46,17 +46,13 @@ public class SelectTravelArea2 extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Intent it = getIntent();
         String answer = it.getStringExtra("TravelArea");
-        Log.d("answer", answer);
 
 
         List<CurrentTrip> tripGroups = loadCurrentTripFromGson();
         for (int i = 0; i < tripGroups.size(); i++) {
-            Log.d("loop", tripGroups.get(i).getCity());
             if(Objects.equals(tripGroups.get(i).getCity(), answer)) {
                 TravelCountry = tripGroups.get(i).getCountry();
                 countryIndex = i;
-                Log.d("tripcontry", TravelCountry.toString());
-                Log.d("loopend", "endloop");
                 break;
             }
         }
@@ -84,7 +80,7 @@ public class SelectTravelArea2 extends AppCompatActivity {
                         coutry = checkedRadioButton.get().getText().toString();
                         Log.d("coutry", coutry);
                         //todo: id 혹은 고유값을 받아서 저장되어야됨
-                        editor.putString("area", checkedRadioButton.get().getText().toString());
+                        editor.putString("area", coutry);
                         editor.commit();
                     }
                 }

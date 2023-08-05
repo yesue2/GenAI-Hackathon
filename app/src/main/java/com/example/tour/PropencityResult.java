@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +31,11 @@ public class PropencityResult extends AppCompatActivity {
         String character = getIntent().getStringExtra("character");
         String travelPreferences = getIntent().getStringExtra("travelPreferences");
 
+        TextView tv_character = findViewById(R.id.tv_character);
+        tv_character.setText('"' + character + '"');
+
+        TextView tv_travelPreferences = findViewById(R.id.tv_travelPreferences);
+        tv_travelPreferences.setText('"' + travelPreferences + '"');
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override

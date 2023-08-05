@@ -61,13 +61,13 @@
         app:layout_constraintTop_toBottomOf="@+id/ic_suitcase"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/character"/>
+        app:layout_constraintBottom_toTopOf="@+id/tv_character"/>
 
     <TextView
-        android:id="@+id/character"
+        android:id="@+id/tv_character"
         android:layout_width="wrap_content"
         android:layout_height="38dp"
-        android:text="성향 표시 자리"
+        android:text='"성향 표시 자리"'
         android:layout_marginTop="6dp"
         android:layout_marginBottom="60dp"
         android:textSize="30dp"
@@ -113,12 +113,12 @@
         app:layout_constraintBottom_toBottomOf="@id/box"/>
 
     <TextView
-        android:id="@+id/travelPreferences"
+        android:id="@+id/tv_travelPreferences"
         android:layout_width="wrap_content"
         android:layout_height="49dp"
         android:layout_marginTop="105dp"
         android:layout_marginBottom="80dp"
-        android:text="여행지 추천 자리"
+        android:text='"여행지 추천 자리"'
         android:gravity="center"
         android:textSize="22dp"
         android:textColor="#2B73FA"

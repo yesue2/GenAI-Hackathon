@@ -28,6 +28,7 @@
         <activity
             android:name=".SelectTravelArea"
             android:exported="false" />
+        <activity android:name=".SelectTravelArea2" />
         <activity
             android:name=".SelectTravelMember"
             android:exported="false" />

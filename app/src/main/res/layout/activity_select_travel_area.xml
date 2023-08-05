@@ -65,7 +65,7 @@
         android:layout_margin="16dp"
         android:background="@drawable/button_rounded_background"
         android:gravity="center"
-        android:text="다음"
+        android:text="@string/next_button"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

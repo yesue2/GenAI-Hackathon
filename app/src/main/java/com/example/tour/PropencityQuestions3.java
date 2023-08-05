@@ -27,11 +27,16 @@ import java.util.List;
 public class PropencityQuestions3 extends AppCompatActivity {
     private int[] extraversion = new int[5];
     private List<Integer> selectedOptions = new ArrayList<>();
+    private AnswerModel viewModel;
+
 
     @Override
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_propencity_travel);
+
+        MyApplication myApplication = (MyApplication) getApplicationContext();
+        viewModel = myApplication.getSharedViewModel();
 
         List<Question> questions = loadQuestionsFromGson();
         LinearLayout linearLayout = findViewById(R.id.question_linearlayout);
@@ -64,7 +69,6 @@ public class PropencityQuestions3 extends AppCompatActivity {
                         extraversion[i] = selectedOptions.get(i) + 1;
                     }
 
-                    AnswerModel viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(AnswerModel.class);
                     viewModel.setExtraversionData(extraversion);
                     int[] extraversionData = viewModel.getExtraversionData().getValue();
                     if (extraversionData != null) {

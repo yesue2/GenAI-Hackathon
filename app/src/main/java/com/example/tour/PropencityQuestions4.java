@@ -27,11 +27,15 @@ import java.util.List;
 public class PropencityQuestions4 extends AppCompatActivity {
     private int[] agreeableness = new int[5];
     private List<Integer> selectedOptions = new ArrayList<>();
+    private AnswerModel viewModel;
 
     @Override
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_propencity_travel);
+
+        MyApplication myApplication = (MyApplication) getApplicationContext();
+        viewModel = myApplication.getSharedViewModel();
 
         List<Question> questions = loadQuestionsFromGson();
         LinearLayout linearLayout = findViewById(R.id.question_linearlayout);
@@ -64,7 +68,6 @@ public class PropencityQuestions4 extends AppCompatActivity {
                         agreeableness[i] = selectedOptions.get(i) + 1;
                     }
 
-                    AnswerModel viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(AnswerModel.class);
                     viewModel.setAgreeablenessData(agreeableness);
                     int[] agreeablenessData = viewModel.getAgreeablenessData().getValue();
                     if (agreeablenessData != null) {

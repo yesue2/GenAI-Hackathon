@@ -40,14 +40,13 @@ public class PropencityQuestions5 extends AppCompatActivity {
     private List<Integer> selectedOptions = new ArrayList<>();
     private AnswerModel viewModel;
 
-
     @Override
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_propencity_travel);
 
-        viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(AnswerModel.class);
-
+        MyApplication myApplication = (MyApplication) getApplicationContext();
+        viewModel = myApplication.getSharedViewModel();
 
         List<Question> questions = loadQuestionsFromGson();
         LinearLayout linearLayout = findViewById(R.id.question_linearlayout);

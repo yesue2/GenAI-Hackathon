@@ -66,7 +66,7 @@
     <TextView
         android:id="@+id/tv_character"
         android:layout_width="wrap_content"
-        android:layout_height="38dp"
+        android:layout_height="wrap_content"
         android:text='"성향 표시 자리"'
         android:layout_marginTop="6dp"
         android:layout_marginBottom="60dp"
@@ -115,7 +115,7 @@
     <TextView
         android:id="@+id/tv_travelPreferences"
         android:layout_width="wrap_content"
-        android:layout_height="49dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="105dp"
         android:layout_marginBottom="80dp"
         android:text='"여행지 추천 자리"'

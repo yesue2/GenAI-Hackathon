@@ -198,6 +198,8 @@ public class PropencityQuestions5 extends AppCompatActivity {
 
                     String character = personalityResponse.getCharacter();
                     String travelPreferences = personalityResponse.getTravelPreferences();
+                    Log.d("PropencityQuestions5", "character: " + character);
+                    Log.d("PropencityQuestions5", "travelPreferences: " + travelPreferences);
 
                     Intent intent = new Intent(PropencityQuestions5.this, PropencityResult.class);
                     intent.putExtra("character", character);

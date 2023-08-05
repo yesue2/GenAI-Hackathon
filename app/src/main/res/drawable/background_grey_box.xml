@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <solid android:color="#0E48B4" /> <!-- 원하는 배경색으로 수정 -->
+    <solid android:color="#F7F7F7" /> <!-- 원하는 배경색으로 수정 -->
     <corners android:radius="10dp" /> <!-- 모서리의 둥글기 정도를 지정 -->
 </shape>

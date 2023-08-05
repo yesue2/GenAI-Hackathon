@@ -154,11 +154,12 @@
         android:layout_height="58dp"
         android:text="여행 정보 입력하기"
         android:textColor="#FFFFFF"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/button_rounded_background"
         android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="16dp"
         android:textStyle="bold"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

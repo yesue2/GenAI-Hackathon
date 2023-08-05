@@ -40,7 +40,7 @@ public class PropencityResult extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PropencityResult.this, SelectDisposition.class);
+                Intent intent = new Intent(PropencityResult.this, SelectTravelArea.class);
                 startActivity(intent);
             }
         });

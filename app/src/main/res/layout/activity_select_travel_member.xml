@@ -39,7 +39,7 @@
         android:gravity="center"
         android:text="여행원 구성을 선택해주세요."
         android:textColor="#2B2B2B"
-        android:textSize="20dp"
+        android:textSize="25dp"
         app:layout_constraintBottom_toTopOf="@+id/dispositionRadioGroup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +72,7 @@
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             android:text="혼자"
-            android:textSize="12dp"
+            android:textSize="18dp"
             android:textStyle="bold" />
 
         <RadioButton
@@ -86,7 +86,7 @@
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             android:text="연인"
-            android:textSize="12dp"
+            android:textSize="18dp"
             android:textStyle="bold" />
 
         <RadioButton
@@ -100,7 +100,7 @@
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             android:text="가족"
-            android:textSize="12dp"
+            android:textSize="18dp"
             android:textStyle="bold" />
 
         <RadioButton
@@ -114,46 +114,45 @@
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             android:text="친구"
-            android:textSize="12dp"
+            android:textSize="18dp"
             android:textStyle="bold" />
 
 
     </RadioGroup>
 
+    <!-- 이전 버튼 -->
     <Button
         android:id="@+id/backButton"
         style="@style/ThickButtonStyle"
-        android:layout_width="155dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="178dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="25dp"
         android:background="@drawable/button_rounded_background_gray"
         android:text="이전"
+        android:textSize="20dp"
+
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.168"
-        app:layout_constraintLeft_toRightOf="@+id/nextButton"
+        app:layout_constraintEnd_toStartOf="@+id/nextButton"
         app:layout_constraintStart_toStartOf="parent" />
 
     <!-- 저장 버튼 -->
     <Button
         android:id="@+id/nextButton"
         style="@style/ThickButtonStyle"
-        android:layout_width="155dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="178dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="25dp"
         android:background="@drawable/button_rounded_background"
         android:text="다음"
+        android:textSize="20dp"
+
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.938"
-        app:layout_constraintLeft_toLeftOf="@+id/backButton"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/backButton" />
 
     <ImageView
         android:id="@+id/iv_one"

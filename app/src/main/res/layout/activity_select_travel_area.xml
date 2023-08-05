@@ -73,16 +73,18 @@
         android:id="@+id/nextButton"
         style="@style/ThickButtonStyle"
         android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_height="58dp"
         android:background="@drawable/button_rounded_background"
         android:gravity="center"
         android:text="@string/next_button"
+        android:textSize="20dp"
         android:textColor="#FFFFFF"
-        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/iv_one"

@@ -5,42 +5,160 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- 히스토리 글씨 -->
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="44dp"
-        android:gravity="center"
-        android:text="A"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        android:id="@+id/historyButton"
+        android:layout_width="55dp"
+        android:layout_height="16dp"
+        android:text="히스토리"
+        android:textColor="#2B2B2B"
+        android:layout_marginTop="29dp"
+        android:layout_marginStart="313dp"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:clickable="true"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
+        app:layout_constraintEnd_toStartOf="@id/ic_history" />
+
+    <!-- 히스토리 아이콘 -->
+    <ImageView
+        android:id="@+id/ic_history"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_history"
+        android:layout_marginTop="27dp"
+        android:layout_marginStart="8dp"
+        android:clickable="true"
+        app:layout_constraintStart_toEndOf="@id/historyButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ic_suitcase"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="165dp"
+        android:src="@drawable/ic_suitcase"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/text1"/>
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/text1"
+        android:layout_width="198dp"
+        android:layout_height="30dp"
+        android:text="당신의 여행 성향은?"
+        android:layout_marginTop="36dp"
+        android:layout_marginStart="107dp"
+        android:layout_marginEnd="107dp"
+        android:textSize="23dp"
+        android:textColor="#2B73FA"
+        android:textStyle="bold"
         android:gravity="center"
-        android:text="평온한 모험가"
-        android:textSize="40sp"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        tools:layout_editor_absoluteX="16dp"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/ic_suitcase"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/character"/>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:id="@+id/character"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:text="성향 표시 자리"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="60dp"
+        android:textSize="30dp"
+        android:textColor="#0E48B4"
+        android:textStyle="bold"
         android:gravity="center"
-        android:text="다양한 활동을 제공하는 도시 여행지, 풍부한 문화와 역사를 가진 곳, 다양한 사람들을 만나는 것을 좋아함"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:layout_editor_absoluteX="30dp"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/text1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/box"/>
 
+
+    <ImageView
+        android:id="@+id/box"
+        android:layout_width="366dp"
+        android:layout_height="211dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="441dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="240dp"
+        android:background="@drawable/background_grey_box"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/first"
+        android:layout_width="200dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginStart="83dp"
+        android:layout_marginEnd="83dp"
+        android:layout_marginBottom="123dp"
+        android:text="몇가지 여행 정보를 입력하여\n당신에게 가장 어울리는"
+        android:gravity="center"
+        android:textSize="16dp"
+        android:textColor="#646464"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/box"
+        app:layout_constraintStart_toStartOf="@id/box"
+        app:layout_constraintEnd_toEndOf="@id/box"
+        app:layout_constraintBottom_toBottomOf="@id/box"/>
+
+    <TextView
+        android:id="@+id/travelPreferences"
+        android:layout_width="wrap_content"
+        android:layout_height="49dp"
+        android:layout_marginTop="105dp"
+        android:layout_marginBottom="80dp"
+        android:text="여행지 추천 자리"
+        android:gravity="center"
+        android:textSize="22dp"
+        android:textColor="#2B73FA"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/box"
+        app:layout_constraintStart_toStartOf="@id/box"
+        app:layout_constraintEnd_toEndOf="@id/box"
+        app:layout_constraintBottom_toBottomOf="@id/box"/>
+
+    <TextView
+        android:id="@+id/end"
+        android:layout_width="200dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="151dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginEnd="124dp"
+        android:layout_marginBottom="39dp"
+        android:text="를 찾아드릴게요!"
+        android:gravity="center"
+        android:textSize="16dp"
+        android:textColor="#646464"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/box"
+        app:layout_constraintStart_toStartOf="@id/box"
+        app:layout_constraintEnd_toEndOf="@id/box"
+        app:layout_constraintBottom_toBottomOf="@id/box"/>
+
+
+    <!-- 다음 버튼 -->
     <Button
         android:id="@+id/pp_result_next_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/next_button"
-
-        app:layout_constraintBottom_toBottomOf="parent"></Button>
+        android:layout_width="366dp"
+        android:layout_height="58dp"
+        android:text="여행 정보 입력하기"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/button_rounded_background"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"
+        android:textStyle="bold"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

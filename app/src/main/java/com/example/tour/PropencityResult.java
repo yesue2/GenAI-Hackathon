@@ -10,6 +10,8 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tour.data.PersonalityResponse;
+
 public class PropencityResult extends AppCompatActivity {
 
     private String travelPreferences = "변화를 즐길 수 있는 여행지";
@@ -24,6 +26,10 @@ public class PropencityResult extends AppCompatActivity {
         editor.commit();
 
         Button nextBtn = findViewById(R.id.pp_result_next_button);
+
+        String character = getIntent().getStringExtra("character");
+        String travelPreferences = getIntent().getStringExtra("travelPreferences");
+
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override

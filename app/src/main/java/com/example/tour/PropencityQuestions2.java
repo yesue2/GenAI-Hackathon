@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.gson.Gson;
 
@@ -24,15 +25,18 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PropencityQuestions2 extends AppCompatActivity {
-    private int[] answers;
+    private int[] conscientiousness = new int[5];
     private List<Integer> selectedOptions = new ArrayList<>();
+    private AnswerModel viewModel;
+
 
     @Override
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_propencity_travel);
 
-        double avg1 = getIntent().getDoubleExtra("avg1", 0.0);
+        MyApplication myApplication = (MyApplication) getApplicationContext();
+        viewModel = myApplication.getSharedViewModel();
 
         List<Question> questions = loadQuestionsFromGson();
         LinearLayout linearLayout = findViewById(R.id.question_linearlayout);
@@ -61,16 +65,17 @@ public class PropencityQuestions2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (allQuestionsAnswered()) {
-                    int sum = 0;
-                    for (int optionIndex : selectedOptions) {
-                        sum += (optionIndex + 1);
+                    for (int i = 0; i < selectedOptions.size(); i++) {
+                        conscientiousness[i] = selectedOptions.get(i) + 1;
                     }
-                    double average = (double) sum / selectedOptions.size();
-                    Log.d("PropencityQuestions2", "Average: " + average);
+
+                    viewModel.setConscientiousnessData(conscientiousness);
+                    int[] conscientiousnessData = viewModel.getConscientiousnessData().getValue();
+                    if (conscientiousnessData != null) {
+                        Log.d("PropencityQuestions2", "conscientiousness data: " + Arrays.toString(conscientiousnessData));
+                    }
 
                     Intent intent = new Intent(PropencityQuestions2.this, PropencityQuestions3.class);
-                    intent.putExtra("avg1", avg1);
-                    intent.putExtra("avg2", average);
                     startActivity(intent);
                 } else {
                     Toast.makeText(PropencityQuestions2.this, "모든 질문에 답변해주세요.", Toast.LENGTH_SHORT).show();

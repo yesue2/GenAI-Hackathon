@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.gson.Gson;
 
@@ -24,18 +25,18 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PropencityQuestions3 extends AppCompatActivity {
-    private int[] answers;
+    private int[] extraversion = new int[5];
     private List<Integer> selectedOptions = new ArrayList<>();
+    private AnswerModel viewModel;
+
 
     @Override
     protected void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_propencity_travel);
 
-        double avg1 = getIntent().getDoubleExtra("avg1", 0.0);
-        double avg2 = getIntent().getDoubleExtra("avg2", 0.0);
-        Log.d("PropencityQuestions3", "avg1: " + avg1);
-        Log.d("PropencityQuestions3", "avg2: " + avg2);
+        MyApplication myApplication = (MyApplication) getApplicationContext();
+        viewModel = myApplication.getSharedViewModel();
 
         List<Question> questions = loadQuestionsFromGson();
         LinearLayout linearLayout = findViewById(R.id.question_linearlayout);
@@ -64,17 +65,17 @@ public class PropencityQuestions3 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (allQuestionsAnswered()) {
-                    int sum = 0;
-                    for (int optionIndex : selectedOptions) {
-                        sum += (optionIndex + 1);
+                    for (int i = 0; i < selectedOptions.size(); i++) {
+                        extraversion[i] = selectedOptions.get(i) + 1;
                     }
-                    double average = (double) sum / selectedOptions.size();
-                    Log.d("PropencityQuestions3", "Average: " + average);
+
+                    viewModel.setExtraversionData(extraversion);
+                    int[] extraversionData = viewModel.getExtraversionData().getValue();
+                    if (extraversionData != null) {
+                        Log.d("PropencityQuestions3", "extraversion data: " + Arrays.toString(extraversionData));
+                    }
 
                     Intent intent = new Intent(PropencityQuestions3.this, PropencityQuestions4.class);
-                    intent.putExtra("avg1", avg1);
-                    intent.putExtra("avg2", avg2);
-                    intent.putExtra("avg3", average);
                     startActivity(intent);
                 } else {
                     Toast.makeText(PropencityQuestions3.this, "모든 질문에 답변해주세요.", Toast.LENGTH_SHORT).show();

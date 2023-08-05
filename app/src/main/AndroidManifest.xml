@@ -4,7 +4,10 @@
     
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -77,6 +80,7 @@
             android:name=".RecommendNextTravel"
             android:exported="false">
         </activity>
+
         <activity
             android:name=".PropencityQuestions"
             android:exported="true">

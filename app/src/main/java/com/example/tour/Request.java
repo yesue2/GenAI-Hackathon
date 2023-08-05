@@ -18,4 +18,8 @@ public class Request {
         }
     }
 
+    public static class PersonalityRequeset {
+        private Integer openness1;
+    }
+
 }

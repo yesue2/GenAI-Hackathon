@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import com.example.tour.data.RecommendResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -60,6 +62,14 @@ public class RecommendedCourseLoading2 extends AppCompatActivity {
         // 레이아웃에 버튼 추가
         loadingLayout.addView(button);
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RecommendedCourseLoading2.this, RecommendCourse2.class);
+                intent.putExtra("travelList",(Serializable) travelSuggestionsList);
+                startActivity(intent);
+            }
+        });
 
 
     }

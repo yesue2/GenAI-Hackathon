@@ -2,10 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".RecommendCourse2">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/recommended_main_title"
@@ -14,40 +12,36 @@
         android:gravity="center"
         android:text="여행 코스 추천2"
         android:textSize="30sp"
-        app:layout_constraintTop_toTopOf="parent"
-        ></TextView>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/course2_day"
+    <LinearLayout
+        android:id="@+id/recommended_LinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="첫째날"
-        android:textSize="16sp"
+        android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/recommended_main_title"
-        ></TextView>
+        >
 
-    <TextView
-        android:id="@+id/course2_morning"
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/recommended_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="오전"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/course2_day"
-        ></TextView>
-    <TextView
-        android:id="@+id/course2_afternoon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="오후"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/course2_morning"
-        ></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/recommended_LinearLayout" >
+        <TextView
+            android:id="@+id/recommended_inner_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="innerText"
+            />
+    </ScrollView>
 
     <Button
         android:id="@+id/course2_nextbutton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/next_button"
-        app:layout_constraintBottom_toBottomOf="parent"></Button>
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

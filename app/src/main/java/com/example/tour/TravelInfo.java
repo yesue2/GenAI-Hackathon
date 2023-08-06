@@ -103,13 +103,6 @@ public class TravelInfo extends AppCompatActivity {
 
                 // 결과 출력
                 Log.d("TravelPlanActivity", result);
-
-                Intent intent = new Intent(TravelInfo.this, RecommendCourse.class);
-                intent.putExtra("selectedArea", selectedArea);
-                intent.putExtra("selectedStartDate", selectedStartDate);
-                intent.putExtra("selectedEndDate", selectedEndDate);
-                intent.putExtra("selectedMember", selectedMember);
-                startActivity(intent);
             }
         });
     }

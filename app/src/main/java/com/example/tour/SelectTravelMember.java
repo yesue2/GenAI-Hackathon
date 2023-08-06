@@ -18,7 +18,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tour.data.Api;
+import com.example.tour.data.PersonalityResponse;
+import com.example.tour.data.RecommendRequest;
 import com.example.tour.data.RecommendResponse;
+import com.example.tour.data.RetrofitClient;
 import com.example.tour.data.TravelSuggestion;
 
 import org.json.JSONException;
@@ -42,20 +46,6 @@ public class SelectTravelMember extends AppCompatActivity {
         setContentView(R.layout.activity_select_travel_member);
         SharedPreferences sharedPreferences = getSharedPreferences("selectTravel",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(10, TimeUnit.MINUTES) // 연결 타임아웃
-                .readTimeout(10, TimeUnit.MINUTES) // 읽기 타임아웃
-                .writeTimeout(10, TimeUnit.MINUTES) // 쓰기 타임아웃
-                .build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://t-api-play.actionfriends.net/api/v1/")
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        TravelService service = retrofit.create(TravelService.class);
 
         RadioGroup dispositionRadioGroup = findViewById(R.id.dispositionRadioGroup);
         dispositionRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -86,18 +76,26 @@ public class SelectTravelMember extends AppCompatActivity {
 
                 startLoadingActivity();
 
-                JSONObject jsonObject = new JSONObject();
+                RecommendRequest request = new RecommendRequest();
                 String area = sharedPreferences.getString("area", "default Area");
                 String member = sharedPreferences.getString("member", "default member");
                 int day = Integer.parseInt(sharedPreferences.getString("day", "default startDate"));
                 String travelPreferences = sharedPreferences.getString("travelPreferences", "default endDate");
-                try{
-                    jsonObject.put("desiredLocation", area);
-                    jsonObject.put("travelType", member);
-                    jsonObject.put("travelDuration",day);
-                    jsonObject.put("travelPreferences", travelPreferences);
 
-                    Call<RecommendResponse> call = service.sandTravelData(jsonObject);
+                    request.setDesiredLocation(area);
+                    request.setTravelType(member);
+                    request.setTravelDuration(String.valueOf(day));
+                    request.setTravelPreferences(travelPreferences);
+
+                Log.d("Retrofit", "setArea: " + area);
+                Log.d("Retrofit", "setMember: " + member);
+                Log.d("Retrofit", "setDay: " + day);
+                Log.d("Retrofit", "setTravel Preferences: " + travelPreferences);
+
+
+                Api api = RetrofitClient.getRetrofitInstance().create(Api.class);
+                    Call<RecommendResponse> call = api.getTravelRecommend(request);
+
                     call.enqueue(new Callback<RecommendResponse>() {
                         @Override
                         public void onResponse(Call<RecommendResponse> call, Response<RecommendResponse> response) {
@@ -117,12 +115,10 @@ public class SelectTravelMember extends AppCompatActivity {
                                         Log.d("Retrofit", "Travel Day: " + travelDay);
                                         Log.d("Retrofit", "Content: " + content);
 
-                                        // Add the travelDay and content to the lists
                                         travelDaysList.add(travelDay);
                                         contentsList.add(content);
                                     }
 
-                                    // Create the intent and add the lists as extras
                                     Intent intent = new Intent(SelectTravelMember.this, RecommendCourse.class);
                                     intent.putIntegerArrayListExtra("travelDays", travelDaysList);
                                     intent.putStringArrayListExtra("contents", contentsList);
@@ -138,10 +134,6 @@ public class SelectTravelMember extends AppCompatActivity {
                             Log.d("Retrofit", "Error: " + t.getMessage());
                         }
                     });
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
 
             }
         });

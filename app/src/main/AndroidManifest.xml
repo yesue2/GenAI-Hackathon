@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -41,12 +39,10 @@
         <activity
             android:name=".PropencityQuestions2"
             android:exported="false">
-
         </activity>
         <activity
             android:name=".PropencityQuestions3"
             android:exported="false">
-
         </activity>
         <activity
             android:name=".PropencityQuestions4"
@@ -56,7 +52,6 @@
         <activity
             android:name=".PropencityQuestions5"
             android:exported="false">
-
         </activity>
         <activity
             android:name=".PropencityResult"
@@ -66,7 +61,6 @@
         <activity
             android:name=".SelectDisposition"
             android:exported="false">
-
         </activity>
         <activity
             android:name=".TravelRecord"
@@ -80,7 +74,10 @@
             android:name=".RecommendNextTravel"
             android:exported="false">
         </activity>
-
+        <activity
+            android:name=".Loading"
+            android:exported="false">
+        </activity>
         <activity
             android:name=".PropencityQuestions"
             android:exported="true">

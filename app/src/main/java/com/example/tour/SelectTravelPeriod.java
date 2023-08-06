@@ -122,7 +122,7 @@ public class SelectTravelPeriod extends AppCompatActivity {
 
                         long diff = endDay.getTime() - startDay.getTime();
                         long diffDays = diff / (24 * 60 * 60 * 1000);
-                        Log.d("days", String.valueOf(diffDays));
+                        Log.d("SelectTravelPeriod", "SelectedDays: " + diffDays);
 
                         editor.putString("day", String.valueOf(diffDays));
                         editor.commit();

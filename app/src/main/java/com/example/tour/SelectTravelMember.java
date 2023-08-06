@@ -57,7 +57,7 @@ public class SelectTravelMember extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 RadioButton radioButton = (RadioButton) findViewById(i);
-                Log.d("getTextradio",radioButton.getText().toString());
+                Log.d("SelectTravelMember","SelectedMember: "+ radioButton.getText().toString());
                 editor.putString("member", radioButton.getText().toString());
                 editor.commit();
             }
@@ -78,6 +78,9 @@ public class SelectTravelMember extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                startLoadingActivity();
+
                 JSONObject jsonObject = new JSONObject();
                 String area = sharedPreferences.getString("area", "default Area");
                 String member = sharedPreferences.getString("member", "default member");
@@ -96,9 +99,9 @@ public class SelectTravelMember extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 Log.d("Retrofit", "Data sent susccessfully");
                                 Log.d("Retrofit", response.toString());
-                                //Intent intent = new Intent(SelectTravelMember.this, RecommendCourse.class);
+                                Intent intent = new Intent(SelectTravelMember.this, RecommendCourse.class);
 
-                                //startActivity(intent);
+                                startActivity(intent);
                             } else {
                                 Log.d("Retrofit", "Data not sent");
                             }
@@ -125,5 +128,9 @@ public class SelectTravelMember extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    private void startLoadingActivity() {
+        Intent loadingIntent = new Intent(SelectTravelMember.this, Loading.class);
+        startActivity(loadingIntent);
     }
 }

@@ -32,7 +32,7 @@ public class RecommendCourse extends AppCompatActivity {
         setContentView(R.layout.activity_recommend_course);
 
         List<Course> courses = loadCourseFromGson();
-        Log.d("course", courses.get(0).toString());
+        Log.d("RecommendCourse", "course: "+ courses.get(0).toString());
 
         LinearLayout linearLayout = findViewById(R.id.recommended_Wrapper);
 

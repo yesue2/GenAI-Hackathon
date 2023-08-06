@@ -78,7 +78,7 @@ public class SelectTravelArea2 extends AppCompatActivity {
                         }
                         checkedRadioButton.set(radioButton);
                         coutry = checkedRadioButton.get().getText().toString();
-                        Log.d("coutry", coutry);
+                        Log.d("SelectTravelArea2", "SelectedCoutry: " + coutry);
                         //todo: id 혹은 고유값을 받아서 저장되어야됨
                         editor.putString("area", coutry);
                         editor.commit();

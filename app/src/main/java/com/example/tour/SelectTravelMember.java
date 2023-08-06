@@ -18,9 +18,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tour.data.RecommendResponse;
+import com.example.tour.data.TravelSuggestion;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -92,23 +97,44 @@ public class SelectTravelMember extends AppCompatActivity {
                     jsonObject.put("travelDuration",day);
                     jsonObject.put("travelPreferences", travelPreferences);
 
-                    Call<Void> call = service.sandTravelData(jsonObject);
-                    call.enqueue(new Callback<Void>() {
+                    Call<RecommendResponse> call = service.sandTravelData(jsonObject);
+                    call.enqueue(new Callback<RecommendResponse>() {
                         @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
+                        public void onResponse(Call<RecommendResponse> call, Response<RecommendResponse> response) {
                             if (response.isSuccessful()) {
                                 Log.d("Retrofit", "Data sent susccessfully");
-                                Log.d("Retrofit", response.toString());
-                                Intent intent = new Intent(SelectTravelMember.this, RecommendCourse.class);
 
-                                startActivity(intent);
-                            } else {
-                                Log.d("Retrofit", "Data not sent");
+                                RecommendResponse recommendResponse = response.body();
+                                if (recommendResponse != null) {
+                                    List<TravelSuggestion> travelSuggestions = recommendResponse.getEmbedded().getTravelSuggestionsList();
+
+                                    ArrayList<Integer> travelDaysList = new ArrayList<>();
+                                    ArrayList<String> contentsList = new ArrayList<>();
+
+                                    for (TravelSuggestion suggestion : travelSuggestions) {
+                                        int travelDay = suggestion.getTravelDay();
+                                        String content = suggestion.getContent();
+                                        Log.d("Retrofit", "Travel Day: " + travelDay);
+                                        Log.d("Retrofit", "Content: " + content);
+
+                                        // Add the travelDay and content to the lists
+                                        travelDaysList.add(travelDay);
+                                        contentsList.add(content);
+                                    }
+
+                                    // Create the intent and add the lists as extras
+                                    Intent intent = new Intent(SelectTravelMember.this, RecommendCourse.class);
+                                    intent.putIntegerArrayListExtra("travelDays", travelDaysList);
+                                    intent.putStringArrayListExtra("contents", contentsList);
+                                    startActivity(intent);
+                                } else {
+                                    Log.d("Retrofit", "Data not sent");
+                                }
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
+                        public void onFailure(Call<RecommendResponse> call, Throwable t) {
                             Log.d("Retrofit", "Error: " + t.getMessage());
                         }
                     });

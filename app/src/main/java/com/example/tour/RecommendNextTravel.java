@@ -1,7 +1,10 @@
 package com.example.tour;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -23,7 +26,7 @@ public class RecommendNextTravel extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend_next_travel);
-
+        Button nextBtn = findViewById(R.id.next);
         List<NextTrip> trips = loadNexttripFromGson();
 
         Random random = new Random();
@@ -34,6 +37,14 @@ public class RecommendNextTravel extends AppCompatActivity {
 
         text.setText(trip.getTravel());
         detail.setText(trip.getDescription());
+
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RecommendNextTravel.this, PropencityQuestions.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

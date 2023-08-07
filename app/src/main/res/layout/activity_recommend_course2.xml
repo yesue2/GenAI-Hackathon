@@ -55,35 +55,30 @@
         android:layout_marginTop="50dp"
         app:layout_constraintTop_toBottomOf="@+id/text1"
         />
-    <androidx.core.widget.NestedScrollView
+
+    <ScrollView
         android:id="@+id/recommended_result_scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/recommended_result_linear"
-        >
-        <LinearLayout
+        app:layout_constraintBottom_toTopOf="@+id/course2_nextbutton"
+        app:layout_constraintTop_toBottomOf="@+id/recommended_result_linear">
+
+        <TextView
+            android:id="@+id/recommended_inner_text"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:text="content" />
 
-            >
-            <TextView
-                android:id="@+id/recommended_inner_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="content"/>
-            <Button
-                android:id="@+id/course2_nextbutton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/next_button"
-                android:textColor="#fff"
-                android:gravity="center"
-                android:background="@drawable/button_rounded_background"
-                />
-
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
+    <Button
+        android:id="@+id/course2_nextbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/next_button"
+        android:textColor="#fff"
+        android:gravity="center"
+        android:background="@drawable/button_rounded_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,4 +48,6 @@ dependencies {
 
     implementation 'org.greenrobot:eventbus:3.2.0'
 
+    //Lottie 라이브러리
+    implementation 'com.airbnb.android:lottie:6.1.0'
 }

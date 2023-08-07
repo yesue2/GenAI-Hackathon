@@ -18,9 +18,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tour.data.RecommendResponse;
+import com.example.tour.data.TravelSuggestion;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -79,5 +84,9 @@ public class SelectTravelMember extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    private void startLoadingActivity() {
+        Intent loadingIntent = new Intent(SelectTravelMember.this, Loading.class);
+        startActivity(loadingIntent);
     }
 }

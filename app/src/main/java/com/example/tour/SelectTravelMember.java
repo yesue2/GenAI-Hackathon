@@ -48,20 +48,6 @@ public class SelectTravelMember extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("selectTravel",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(10, TimeUnit.MINUTES) // 연결 타임아웃
-                .readTimeout(10, TimeUnit.MINUTES) // 읽기 타임아웃
-                .writeTimeout(10, TimeUnit.MINUTES) // 쓰기 타임아웃
-                .build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://t-api-play.actionfriends.net/api/v1/")
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        TravelService service = retrofit.create(TravelService.class);
-
         RadioGroup dispositionRadioGroup = findViewById(R.id.dispositionRadioGroup);
         dispositionRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -102,9 +88,5 @@ public class SelectTravelMember extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-    private void startLoadingActivity() {
-        Intent loadingIntent = new Intent(SelectTravelMember.this, Loading.class);
-        startActivity(loadingIntent);
     }
 }

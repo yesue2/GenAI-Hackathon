@@ -74,6 +74,7 @@ public class PropencityQuestions3 extends AppCompatActivity {
 
             RadioGroup radioGroup = new RadioGroup(this);
             radioGroup.setOrientation(RadioGroup.HORIZONTAL);
+            radioGroup.setGravity(Gravity.CENTER);
             radioGroup.setPadding(dpToPx(23), 0, 0, 0);
             for (int j = 0; j < options.length; j++) {
                 RadioButton radioButton = new RadioButton(this);

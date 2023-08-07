@@ -55,7 +55,7 @@
         android:id="@+id/text2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="최대 3분 정도 걸릴수 있습니다.\n잠시만 기다려주세요!"
+        android:text="최대 10분 정도 걸릴수 있습니다.\n잠시만 기다려주세요!"
         android:textStyle="bold"
         android:textSize="16dp"
         android:gravity="center"

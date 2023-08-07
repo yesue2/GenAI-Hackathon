@@ -59,7 +59,7 @@
     <ScrollView
         android:id="@+id/recommended_result_scroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/course2_nextbutton"
         app:layout_constraintTop_toBottomOf="@+id/recommended_result_linear">
 
@@ -67,18 +67,24 @@
             android:id="@+id/recommended_inner_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="content" />
+            android:text="content"
+            android:layout_marginStart="23.5dp"
+            android:layout_marginEnd="23.5dp"/>
 
     </ScrollView>
     <Button
         android:id="@+id/course2_nextbutton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/next_button"
-        android:textColor="#fff"
-        android:gravity="center"
+        android:layout_width="366dp"
+        android:layout_height="58dp"
+        android:text="다음 여행지 추천 보기"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
         android:background="@drawable/button_rounded_background"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textStyle="bold"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

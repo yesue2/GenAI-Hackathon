@@ -29,7 +29,7 @@ public class RecommendedCourseLoading extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recommended_course_loading);
+        setContentView(R.layout.activity_loading);
 
         SharedPreferences sharedPreferences = getSharedPreferences("selectTravel",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

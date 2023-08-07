@@ -31,9 +31,7 @@ public class RecommendedCourseLoading2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recommended_course_loading);
-
-        ConstraintLayout loadingLayout = findViewById(R.id.loading);
+        setContentView(R.layout.activity_loading_end);
 
         List<RecommendResponse.TravelSuggestions> travelSuggestionsList = (List<RecommendResponse.TravelSuggestions>) getIntent().getSerializableExtra("travelSuggestionsList");
 
@@ -42,27 +40,9 @@ public class RecommendedCourseLoading2 extends AppCompatActivity {
                 Log.d("item-content", item.getContent());
         }
 
+        Button nextBtn = findViewById(R.id.nextButton);
 
-
-
-
-        Button button = new Button(this);
-
-        button.setText("다음");
-
-        ConstraintLayout.LayoutParams params = new ConstraintLayout.LayoutParams(
-                ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT
-        );
-
-        params.bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID;
-
-        // 버튼에 LayoutParams 설정
-        button.setLayoutParams(params);
-
-        // 레이아웃에 버튼 추가
-        loadingLayout.addView(button);
-
-        button.setOnClickListener(new View.OnClickListener() {
+        nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(RecommendedCourseLoading2.this, RecommendCourse2.class);

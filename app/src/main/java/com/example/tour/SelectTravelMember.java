@@ -85,8 +85,4 @@ public class SelectTravelMember extends AppCompatActivity {
             }
         });
     }
-    private void startLoadingActivity() {
-        Intent loadingIntent = new Intent(SelectTravelMember.this, Loading.class);
-        startActivity(loadingIntent);
-    }
 }

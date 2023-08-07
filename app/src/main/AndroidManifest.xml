@@ -24,9 +24,6 @@
             android:name=".RecommendCourse2"
             android:exported="false" />
         <activity
-            android:name=".TravelInfo"
-            android:exported="false" />
-        <activity
             android:name=".MyPage"
             android:exported="false" />
         <activity

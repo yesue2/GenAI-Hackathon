@@ -70,8 +70,6 @@ public class RecommendedCourseLoading extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         Log.d("responseSuccessful", "is succesfull");
                         RecommendResponse result = response.body();
-                        //Log.d("response", response.body().toString());
-                        //Log.d("response", result.toString());
 
                         if(result.get_embedded() == null){
                             Log.d("null", "true");

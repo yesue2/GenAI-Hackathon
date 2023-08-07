@@ -91,7 +91,7 @@ public class SelectTravelPeriod extends AppCompatActivity {
                 Calendar date = Calendar.getInstance();
                 date.set(curYear, curMonth, curDay);
                 datePickerDialog.getDatePicker().setMinDate(date.getTimeInMillis());
-                date.add(Calendar.DAY_OF_MONTH,3);
+                date.add(Calendar.DAY_OF_MONTH,2);
                 datePickerDialog.getDatePicker().setMaxDate(date.getTimeInMillis());
 
                 // DatePickerDialog 표시
@@ -121,7 +121,7 @@ public class SelectTravelPeriod extends AppCompatActivity {
                         endDay = dateFormat.parse(endDate);
 
                         long diff = endDay.getTime() - startDay.getTime();
-                        long diffDays = diff / (24 * 60 * 60 * 1000);
+                        long diffDays = (diff / (24 * 60 * 60 * 1000)) + 1;
                         Log.d("SelectTravelPeriod", "SelectedDays: " + diffDays);
 
                         editor.putString("day", String.valueOf(diffDays));

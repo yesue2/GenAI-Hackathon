@@ -84,6 +84,7 @@ public class PropencityQuestions5 extends AppCompatActivity {
 
             RadioGroup radioGroup = new RadioGroup(this);
             radioGroup.setOrientation(RadioGroup.HORIZONTAL);
+            radioGroup.setGravity(Gravity.CENTER);
             radioGroup.setPadding(dpToPx(23), 0, 0, 0);
             for (int j = 0; j < options.length; j++) {
                 RadioButton radioButton = new RadioButton(this);
@@ -208,7 +209,6 @@ public class PropencityQuestions5 extends AppCompatActivity {
         Log.d("PropencityQuestions5", "Neuroticism data: " + Arrays.toString(neuroticismData));
 
 
-        // 데이터를 이용하여 PersonalityRequest 객체 생성 및 API 호출
         PersonalityRequest request = new PersonalityRequest();
         request.setOpenness1(opennessData[0]);
         request.setOpenness2(opennessData[1]);

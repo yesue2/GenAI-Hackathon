@@ -54,19 +54,16 @@
         android:layout_height="350dp"
         app:layout_constraintBottom_toTopOf="@+id/nextButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_selectMember"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toBottomOf="@id/tv_selectMember">
 
         <com.google.android.flexbox.FlexboxLayout
             android:id="@+id/flexboxLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="top"
             app:flexWrap="wrap"
-            app:justifyContent="center"
-            app:layout_constraintHorizontal_bias="0.54" />
+            app:justifyContent="center"/>
     </ScrollView>
 
     <Button

@@ -18,7 +18,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tour.data.Api;
+import com.example.tour.data.PersonalityResponse;
+import com.example.tour.data.RecommendRequest;
 import com.example.tour.data.RecommendResponse;
+import com.example.tour.data.RetrofitClient;
 import com.example.tour.data.TravelSuggestion;
 
 import org.json.JSONException;

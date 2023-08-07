@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.tour.data.RecommendResponse;
+import com.example.tour.data.TravelData;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,6 +48,7 @@ public class RecommendedCourseLoading extends AppCompatActivity {
                 .build();
 
         TravelService service = retrofit.create(TravelService.class);
+        TravelData data = new TravelData();
 
         JSONObject jsonObject = new JSONObject();
         String area = sharedPreferences.getString("area", "default Area");
@@ -54,26 +56,39 @@ public class RecommendedCourseLoading extends AppCompatActivity {
         int day = Integer.parseInt(sharedPreferences.getString("day", "default startDate"));
         String travelPreferences = sharedPreferences.getString("travelPreferences", "default endDate");
         try{
-            jsonObject.put("desiredLocation", area);
-            jsonObject.put("travelType", member);
-            jsonObject.put("travelDuration",day);
-            jsonObject.put("travelPreferences", travelPreferences);
+            data.setDesiredLocation(area);
+            data.setTravelType(member);
+            data.setTravelDuration(day);
+            data.setTravelPreferences(travelPreferences);
 
-            Call<RecommendResponse> call = service.sandTravelData(jsonObject);
+            Call<RecommendResponse> call = service.sandTravelData(data);
             Log.d("callRetrofit", "call start");
             call.enqueue(new Callback<RecommendResponse>() {
                 @Override
                 public void onResponse(Call<RecommendResponse> call, Response<RecommendResponse> response) {
                     Log.d("onResponse", "get response");
                     if (response.isSuccessful()) {
+                        Log.d("responseSuccessful", "is succesfull");
                         RecommendResponse result = response.body();
+                        //Log.d("response", response.body().toString());
+                        //Log.d("response", result.toString());
 
-                        List<RecommendResponse.TravelSuggestions> travelList = result.get_embedded().getTravelSuggestionsList();
-                        Log.d("Retrofit", "Data sent susccessfully");
-                        Log.d("Retrofit", result.get_embedded().getTravelSuggestionsList().toString());
-                        Intent intent = new Intent(RecommendedCourseLoading.this, RecommendedCourseLoading2.class);
-                        intent.putExtra("travelSuggestionsList", (Serializable) travelList);
-                        startActivity(intent);
+                        if(result.get_embedded() == null){
+                            Log.d("null", "true");
+                            Log.d("null", response.body().toString());
+                            Log.d("null", result.toString());
+                        }
+                        else {
+                            Log.d("Retrofit", "Data sent susccessfully");
+                            Log.d("Retrofit", result.get_embedded().getTravelSuggestionsList().toString());
+                            List<RecommendResponse.TravelSuggestions> travelList = result.get_embedded().getTravelSuggestionsList();
+                            Intent intent = new Intent(RecommendedCourseLoading.this, RecommendedCourseLoading2.class);
+                            intent.putExtra("travelSuggestionsList", (Serializable) travelList);
+                            startActivity(intent);
+
+                        }
+
+
                     } else {
                         Log.d("Retrofit",  response.code() + " : Data not sent");
                     }
@@ -84,7 +99,7 @@ public class RecommendedCourseLoading extends AppCompatActivity {
                     Log.d("Retrofit", "Error: " + t.getMessage());
                 }
             });
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -18,7 +18,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tour.data.Api;
+import com.example.tour.data.PersonalityResponse;
+import com.example.tour.data.RecommendRequest;
 import com.example.tour.data.RecommendResponse;
+import com.example.tour.data.RetrofitClient;
 import com.example.tour.data.TravelSuggestion;
 
 import org.json.JSONException;
@@ -43,6 +47,20 @@ public class SelectTravelMember extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("selectTravel",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(10, TimeUnit.MINUTES) // 연결 타임아웃
+                .readTimeout(10, TimeUnit.MINUTES) // 읽기 타임아웃
+                .writeTimeout(10, TimeUnit.MINUTES) // 쓰기 타임아웃
+                .build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://t-api-play.actionfriends.net/api/v1/")
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        TravelService service = retrofit.create(TravelService.class);
 
         RadioGroup dispositionRadioGroup = findViewById(R.id.dispositionRadioGroup);
         dispositionRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

@@ -27,7 +27,6 @@ public class RecommendCourse2 extends AppCompatActivity {
         setContentView(R.layout.activity_recommend_course2);
         List<RecommendResponse.TravelSuggestions> list = (List<RecommendResponse.TravelSuggestions>) getIntent().getSerializableExtra("travelList");
         LinearLayout ll = findViewById(R.id.recommended_result_linear);
-        ScrollView sv = findViewById(R.id.recommended_result_scroll);
         AtomicReference<RadioButton> checkedRadioButton = new AtomicReference<>();
 
         for (RecommendResponse.TravelSuggestions item : list) {

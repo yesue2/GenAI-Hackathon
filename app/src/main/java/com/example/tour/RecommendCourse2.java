@@ -3,6 +3,7 @@ package com.example.tour;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +26,12 @@ public class RecommendCourse2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend_course2);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("selectTravel",MODE_PRIVATE);
+        String C = sharedPreferences.getString("character", "defualtName");
+        TextView tvTitle = findViewById(R.id.recommended_result_title);
+        tvTitle.setText('"' + C + '"' + "를 위한\n여행 코스 추천입니다.");
+
         List<RecommendResponse.TravelSuggestions> list = (List<RecommendResponse.TravelSuggestions>) getIntent().getSerializableExtra("travelList");
         LinearLayout ll = findViewById(R.id.recommended_result_linear);
         AtomicReference<RadioButton> checkedRadioButton = new AtomicReference<>();

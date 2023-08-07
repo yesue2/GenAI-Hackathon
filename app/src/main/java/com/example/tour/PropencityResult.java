@@ -23,13 +23,14 @@ public class PropencityResult extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("selectTravel",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("travelPreferences", travelPreferences);
-        editor.commit();
+
 
         Button nextBtn = findViewById(R.id.pp_result_next_button);
 
         String character = getIntent().getStringExtra("character");
         String travelPreferences = getIntent().getStringExtra("travelPreferences");
+        editor.putString("character", character);
+        editor.commit();
 
         TextView tv_character = findViewById(R.id.tv_character);
         tv_character.setText('"' + character + '"');

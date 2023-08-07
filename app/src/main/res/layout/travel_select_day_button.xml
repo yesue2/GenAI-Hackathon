@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioButton
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="80dp"
+    android:layout_height="50dp"
+
+    android:text="day1"
+    android:textSize="15sp"
+    android:textColor="@drawable/radio_travel_text_color"
+    android:gravity="center"
+    android:layout_marginHorizontal="5dp"
+    android:button="@drawable/toggle_background"
+    android:background="@drawable/radio_travel_result_select"
+
+    />

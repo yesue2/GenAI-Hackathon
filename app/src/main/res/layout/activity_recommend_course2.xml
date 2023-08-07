@@ -51,6 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center"
         app:layout_constraintTop_toBottomOf="@+id/text1"
         ></LinearLayout>
     <ScrollView
@@ -59,10 +60,29 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/recommended_result_linear"
         >
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="content"/>
+            android:orientation="vertical"
+
+            >
+            <TextView
+                android:id="@+id/recommended_inner_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="content"/>
+            <Button
+                android:id="@+id/course2_nextbutton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/next_button"
+                android:textColor="#fff"
+                android:gravity="center"
+                android:background="@drawable/button_rounded_background"
+                />
+
+        </LinearLayout>
+
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

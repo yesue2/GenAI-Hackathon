@@ -18,27 +18,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.tour.data.Api;
-import com.example.tour.data.PersonalityResponse;
-import com.example.tour.data.RecommendRequest;
-import com.example.tour.data.RecommendResponse;
-import com.example.tour.data.RetrofitClient;
-import com.example.tour.data.TravelSuggestion;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.OkHttpClient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
 public class SelectTravelMember extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){

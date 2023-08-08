@@ -6,10 +6,6 @@ public class RecommendRequest {
     private String travelDuration;
     private String travelType;
 
-    public RecommendRequest() {
-
-    }
-
     public String getTravelPreferences() { return travelPreferences;}
     public void setTravelPreferences(String travelPreferences) {this.travelPreferences = travelPreferences;}
 

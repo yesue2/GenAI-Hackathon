@@ -6,24 +6,20 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
+import com.example.tour.data.Api;
+import com.example.tour.data.RecommendRequest;
 import com.example.tour.data.RecommendResponse;
-import com.example.tour.data.TravelData;
+import com.example.tour.data.RetrofitClient;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RecommendedCourseLoading extends AppCompatActivity {
 
@@ -33,22 +29,9 @@ public class RecommendedCourseLoading extends AppCompatActivity {
         setContentView(R.layout.activity_loading);
 
         SharedPreferences sharedPreferences = getSharedPreferences("selectTravel",MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(10, TimeUnit.MINUTES) // 연결 타임아웃
-                .readTimeout(10, TimeUnit.MINUTES) // 읽기 타임아웃
-                .writeTimeout(10, TimeUnit.MINUTES) // 쓰기 타임아웃
-                .build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://t-api-play.actionfriends.net/api/v1/")
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        TravelService service = retrofit.create(TravelService.class);
-        TravelData data = new TravelData();
+        Api api = RetrofitClient.getRetrofitInstance().create(Api.class);
+        RecommendRequest request = new RecommendRequest();
 
         JSONObject jsonObject = new JSONObject();
         String area = sharedPreferences.getString("area", "default Area");
@@ -56,12 +39,13 @@ public class RecommendedCourseLoading extends AppCompatActivity {
         int day = Integer.parseInt(sharedPreferences.getString("day", "default startDate"));
         String travelPreferences = sharedPreferences.getString("travelPreferences", "default endDate");
         try{
-            data.setDesiredLocation(area);
-            data.setTravelType(member);
-            data.setTravelDuration(day);
-            data.setTravelPreferences(travelPreferences);
+            request.setDesiredLocation(area);
+            request.setTravelType(member);
+            request.setTravelDuration(String.valueOf(day));
+            request.setTravelPreferences(travelPreferences);
 
-            Call<RecommendResponse> call = service.sandTravelData(data);
+            Call<RecommendResponse> call = api.getTravelRecommend(request);
+
             Log.d("callRetrofit", "call start");
             call.enqueue(new Callback<RecommendResponse>() {
                 @Override
@@ -88,14 +72,23 @@ public class RecommendedCourseLoading extends AppCompatActivity {
 
 
                     } else {
-                        Log.d("Retrofit",  response.code() + " : Data not sent");
+                        Log.d("Retrofit", response.code() + " : Data not sent");
+
+                        Intent intent = new Intent(RecommendedCourseLoading.this, PropencityQuestions.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        finish();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<RecommendResponse> call, Throwable t) {
-                    Log.d("Retrofit", "Error: " + t.getMessage());
-                }
+                        Log.d("Retrofit", "Error: " + t.getMessage());
+
+                        Intent intent = new Intent(RecommendedCourseLoading.this, PropencityQuestions.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                        finish();                 }
             });
         } catch (Exception e) {
             e.printStackTrace();

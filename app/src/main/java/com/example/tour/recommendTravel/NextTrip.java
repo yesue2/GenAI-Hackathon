@@ -1,4 +1,4 @@
-package com.example.tour;
+package com.example.tour.recommendTravel;
 
 public class NextTrip {
 

@@ -1,14 +1,9 @@
-package com.example.tour;
+package com.example.tour.selectTravelInfo;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.RelativeSizeSpan;
-import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tour.R;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.gson.Gson;
 
@@ -32,28 +28,38 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class SelectTravelArea extends AppCompatActivity {
-    protected String TravelArea;
+public class SelectTravelArea2 extends AppCompatActivity {
+    protected List<String> TravelCountry;
+    protected int countryIndex;
+    protected String coutry;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_travel_area);
-
+        //여행기본정보 페이지 1번
         SharedPreferences sharedPreferences = getSharedPreferences("selectTravel",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        Intent it = getIntent();
+        String answer = it.getStringExtra("TravelArea");
 
 
-        // string 배열만큼 버튼 생성
         List<CurrentTrip> tripGroups = loadCurrentTripFromGson();
+        for (int i = 0; i < tripGroups.size(); i++) {
+            if(Objects.equals(tripGroups.get(i).getCity(), answer)) {
+                TravelCountry = tripGroups.get(i).getCountry();
+                countryIndex = i;
+                break;
+            }
+        }
         FlexboxLayout flexboxLayout = findViewById(R.id.flexboxLayout);
         AtomicReference<RadioButton> checkedRadioButton = new AtomicReference<>();
-        for (int i = 0; i < tripGroups.size(); i++) {
+        for (int i = 0; i < TravelCountry.size(); i++) {
             LayoutInflater layoutInflater = LayoutInflater.from(this);
 
             RadioButton radioButton = (RadioButton) layoutInflater.inflate(R.layout.travel_item_button,flexboxLayout, false );
 
-            radioButton.setText(tripGroups.get(i).getCity());
+            radioButton.setText(TravelCountry.get(i));
             radioButton.setId(View.generateViewId());
 
             // FlexboxLayout에 RadioButton 추가
@@ -67,7 +73,11 @@ public class SelectTravelArea extends AppCompatActivity {
                             previousCheckedRadioButton.setChecked(false);
                         }
                         checkedRadioButton.set(radioButton);
-                        TravelArea = checkedRadioButton.get().getText().toString();
+                        coutry = checkedRadioButton.get().getText().toString();
+                        Log.d("SelectTravelArea2", "SelectedCoutry: " + coutry);
+                        //todo: id 혹은 고유값을 받아서 저장되어야됨
+                        editor.putString("area", coutry);
+                        editor.commit();
                     }
                 }
             });
@@ -75,31 +85,15 @@ public class SelectTravelArea extends AppCompatActivity {
 
         @SuppressLint({"MissingInflatedId", "LocalSuppress"})
         TextView tv = findViewById(R.id.tv_selectMember);
-        String text = tv.getText().toString();
-        Spannable spannable = new SpannableString(text);
-        int startIndex = text.indexOf("여행 지역");
-        int endIndex = startIndex + "여행 지역".length();
-        spannable.setSpan(new StyleSpan(Typeface.BOLD), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannable.setSpan(new RelativeSizeSpan(1.2f), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        tv.setText(spannable);
+        tv.setText("아름다운 "+ answer+"!"+"\n 그 중 어디를 가볼까요?");
 
         @SuppressLint({"MissingInflatedId", "LocalSuppress"})
         Button nextButton = findViewById(R.id.nextButton);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                    if(Objects.equals(TravelArea, "세종특별자치시")){
-                        editor.putString("area", "세종특별자치시");
-                        editor.commit();
-                        Intent intent = new Intent(SelectTravelArea.this, SelectTravelPeriod.class);
-                        startActivity(intent);
-                    }
-                    else{
-                        Intent intent = new Intent(SelectTravelArea.this, SelectTravelArea2.class);
-                        intent.putExtra("TravelArea", TravelArea);
-                        startActivity(intent);
-                    }
+                    Intent intent = new Intent(SelectTravelArea2.this, SelectTravelPeriod.class);
+                    startActivity(intent);
             }
         });
 

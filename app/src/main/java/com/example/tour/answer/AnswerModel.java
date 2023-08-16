@@ -1,4 +1,4 @@
-package com.example.tour;
+package com.example.tour.answer;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

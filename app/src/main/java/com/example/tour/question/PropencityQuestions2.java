@@ -1,4 +1,4 @@
-package com.example.tour;
+package com.example.tour.question;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -23,8 +23,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
+import com.example.tour.R;
+import com.example.tour.answer.AnswerModel;
+import com.example.tour.answer.MyApplication;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -35,8 +37,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PropencityQuestions3 extends AppCompatActivity {
-    private int[] extraversion = new int[5];
+public class PropencityQuestions2 extends AppCompatActivity {
+    private int[] conscientiousness = new int[5];
     private List<Integer> selectedOptions = new ArrayList<>();
     private AnswerModel viewModel;
 
@@ -56,7 +58,7 @@ public class PropencityQuestions3 extends AppCompatActivity {
         int textSize = dpToPx(25);
 
         String[] options = {"1","2","3","4","5"};
-        for (int i = 10; i < 15; i++) {
+        for (int i = 5; i < 10; i++) {
             Question question = questions.get(i);
             TextView textView = new TextView(this);
             textView.setText(question.getText());
@@ -114,19 +116,19 @@ public class PropencityQuestions3 extends AppCompatActivity {
             public void onClick(View view) {
                 if (allQuestionsAnswered()) {
                     for (int i = 0; i < selectedOptions.size(); i++) {
-                        extraversion[i] = selectedOptions.get(i) + 1;
+                        conscientiousness[i] = selectedOptions.get(i) + 1;
                     }
 
-                    viewModel.setExtraversionData(extraversion);
-                    int[] extraversionData = viewModel.getExtraversionData().getValue();
-                    if (extraversionData != null) {
-                        Log.d("PropencityQuestions3", "extraversion data: " + Arrays.toString(extraversionData));
+                    viewModel.setConscientiousnessData(conscientiousness);
+                    int[] conscientiousnessData = viewModel.getConscientiousnessData().getValue();
+                    if (conscientiousnessData != null) {
+                        Log.d("PropencityQuestions2", "conscientiousness data: " + Arrays.toString(conscientiousnessData));
                     }
 
-                    Intent intent = new Intent(PropencityQuestions3.this, PropencityQuestions4.class);
+                    Intent intent = new Intent(PropencityQuestions2.this, PropencityQuestions3.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(PropencityQuestions3.this, "모든 질문에 답변해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PropencityQuestions2.this, "모든 질문에 답변해주세요.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -145,7 +147,6 @@ public class PropencityQuestions3 extends AppCompatActivity {
     private int dpToPx(int dp) {
         return (int) (dp * getResources().getDisplayMetrics().density);
     }
-
 
     private boolean allQuestionsAnswered() {
         LinearLayout linearLayout = findViewById(R.id.question_linearlayout);

@@ -1,4 +1,4 @@
-package com.example.tour;
+package com.example.tour.question;
 
 
 public class Question {

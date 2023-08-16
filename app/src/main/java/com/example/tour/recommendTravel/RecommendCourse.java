@@ -1,31 +1,31 @@
-package com.example.tour;
+package com.example.tour.recommendTravel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.example.tour.R;
+import com.example.tour.TravelRecord;
 import com.example.tour.data.RecommendResponse;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class RecommendCourse2 extends AppCompatActivity {
+public class RecommendCourse extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recommend_course2);
+        setContentView(R.layout.activity_recommend_course);
 
         SharedPreferences sharedPreferences = getSharedPreferences("selectTravel",MODE_PRIVATE);
         String C = sharedPreferences.getString("character", "defualtName");
@@ -82,7 +82,7 @@ public class RecommendCourse2 extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RecommendCourse2.this, TravelRecord.class);
+                Intent intent = new Intent(RecommendCourse.this, TravelRecord.class);
                 startActivity(intent);
             }
         });

@@ -1,8 +1,10 @@
-package com.example.tour;
+package com.example.tour.answer;
 
 import android.app.Application;
 
 import androidx.lifecycle.ViewModelProvider;
+
+import com.example.tour.answer.AnswerModel;
 
 public class MyApplication extends Application {
     private AnswerModel sharedViewModel;

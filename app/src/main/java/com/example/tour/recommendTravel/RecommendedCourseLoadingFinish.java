@@ -1,32 +1,20 @@
-package com.example.tour;
+package com.example.tour.recommendTravel;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.tour.R;
 import com.example.tour.data.RecommendResponse;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import okhttp3.OkHttpClient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-public class RecommendedCourseLoading2 extends AppCompatActivity {
+public class RecommendedCourseLoadingFinish extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +33,7 @@ public class RecommendedCourseLoading2 extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RecommendedCourseLoading2.this, RecommendCourse2.class);
+                Intent intent = new Intent(RecommendedCourseLoadingFinish.this, RecommendCourse.class);
                 intent.putExtra("travelList",(Serializable) travelSuggestionsList);
                 startActivity(intent);
             }

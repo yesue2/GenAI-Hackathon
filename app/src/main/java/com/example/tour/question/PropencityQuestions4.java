@@ -1,4 +1,4 @@
-package com.example.tour;
+package com.example.tour.question;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -24,6 +24,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tour.R;
+import com.example.tour.answer.AnswerModel;
+import com.example.tour.answer.MyApplication;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -34,11 +37,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PropencityQuestions2 extends AppCompatActivity {
-    private int[] conscientiousness = new int[5];
+public class PropencityQuestions4 extends AppCompatActivity {
+    private int[] agreeableness = new int[5];
     private List<Integer> selectedOptions = new ArrayList<>();
     private AnswerModel viewModel;
-
 
     @Override
     protected void onCreate(Bundle saveInstanceState){
@@ -55,7 +57,7 @@ public class PropencityQuestions2 extends AppCompatActivity {
         int textSize = dpToPx(25);
 
         String[] options = {"1","2","3","4","5"};
-        for (int i = 5; i < 10; i++) {
+        for (int i = 15; i < 20; i++) {
             Question question = questions.get(i);
             TextView textView = new TextView(this);
             textView.setText(question.getText());
@@ -113,19 +115,19 @@ public class PropencityQuestions2 extends AppCompatActivity {
             public void onClick(View view) {
                 if (allQuestionsAnswered()) {
                     for (int i = 0; i < selectedOptions.size(); i++) {
-                        conscientiousness[i] = selectedOptions.get(i) + 1;
+                        agreeableness[i] = selectedOptions.get(i) + 1;
                     }
 
-                    viewModel.setConscientiousnessData(conscientiousness);
-                    int[] conscientiousnessData = viewModel.getConscientiousnessData().getValue();
-                    if (conscientiousnessData != null) {
-                        Log.d("PropencityQuestions2", "conscientiousness data: " + Arrays.toString(conscientiousnessData));
+                    viewModel.setAgreeablenessData(agreeableness);
+                    int[] agreeablenessData = viewModel.getAgreeablenessData().getValue();
+                    if (agreeablenessData != null) {
+                        Log.d("PropencityQuestions4", "agreeableness data: " + Arrays.toString(agreeablenessData));
                     }
 
-                    Intent intent = new Intent(PropencityQuestions2.this, PropencityQuestions3.class);
+                    Intent intent = new Intent(PropencityQuestions4.this, PropencityQuestions5.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(PropencityQuestions2.this, "모든 질문에 답변해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PropencityQuestions4.this, "모든 질문에 답변해주세요.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -138,12 +140,12 @@ public class PropencityQuestions2 extends AppCompatActivity {
         spannableType.setSpan(new StyleSpan(Typeface.BOLD), startTypeIndex, endTypeIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableType.setSpan(new RelativeSizeSpan(1.2f), startTypeIndex, endTypeIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         text1.setText(spannableType);
-
     }
 
     private int dpToPx(int dp) {
         return (int) (dp * getResources().getDisplayMetrics().density);
     }
+
 
     private boolean allQuestionsAnswered() {
         LinearLayout linearLayout = findViewById(R.id.question_linearlayout);
@@ -164,7 +166,6 @@ public class PropencityQuestions2 extends AppCompatActivity {
         }
         return true;
     }
-
     private List<Question> loadQuestionsFromGson() {
         List<Question> questions = new ArrayList<>();
         try {

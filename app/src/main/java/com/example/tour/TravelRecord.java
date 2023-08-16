@@ -11,6 +11,8 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tour.recommendTravel.RecommendNextTravel;
+
 
 public class TravelRecord extends AppCompatActivity {
     @Override

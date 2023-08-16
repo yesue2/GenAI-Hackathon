@@ -1,4 +1,4 @@
-package com.example.tour;
+package com.example.tour.selectTravelInfo;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -17,6 +17,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.tour.R;
+import com.example.tour.recommendTravel.RecommendedCourseLoading;
 
 public class SelectTravelMember extends AppCompatActivity {
     @Override

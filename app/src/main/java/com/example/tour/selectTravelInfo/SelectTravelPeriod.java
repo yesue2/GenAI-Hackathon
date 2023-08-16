@@ -1,4 +1,4 @@
-package com.example.tour;
+package com.example.tour.selectTravelInfo;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
@@ -18,10 +18,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tour.R;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;

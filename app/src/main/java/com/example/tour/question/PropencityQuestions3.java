@@ -1,4 +1,4 @@
-package com.example.tour;
+package com.example.tour.question;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -24,6 +24,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tour.R;
+import com.example.tour.answer.AnswerModel;
+import com.example.tour.answer.MyApplication;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -34,10 +37,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class PropencityQuestions extends AppCompatActivity {
-    private int[] openness = new int[5];
+public class PropencityQuestions3 extends AppCompatActivity {
+    private int[] extraversion = new int[5];
     private List<Integer> selectedOptions = new ArrayList<>();
     private AnswerModel viewModel;
+
 
     @Override
     protected void onCreate(Bundle saveInstanceState){
@@ -50,12 +54,11 @@ public class PropencityQuestions extends AppCompatActivity {
         List<Question> questions = loadQuestionsFromGson();
         LinearLayout linearLayout = findViewById(R.id.question_linearlayout);
 
-
         int buttonSize = dpToPx(65);
         int textSize = dpToPx(25);
 
         String[] options = {"1","2","3","4","5"};
-        for (int i = 0; i < 5; i++) {
+        for (int i = 10; i < 15; i++) {
             Question question = questions.get(i);
             TextView textView = new TextView(this);
             textView.setText(question.getText());
@@ -108,27 +111,27 @@ public class PropencityQuestions extends AppCompatActivity {
         Button nextBtn = findViewById(R.id.propencity_submit_button);
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 if (allQuestionsAnswered()) {
                     for (int i = 0; i < selectedOptions.size(); i++) {
-                        openness[i] = selectedOptions.get(i) + 1;
+                        extraversion[i] = selectedOptions.get(i) + 1;
                     }
 
-                    viewModel.setOpennessData(openness);
-                    int[] opennessData = viewModel.getOpennessData().getValue();
-                    if (opennessData != null) {
-                        Log.d("PropencityQuestions", "Openness data: " + Arrays.toString(opennessData));
+                    viewModel.setExtraversionData(extraversion);
+                    int[] extraversionData = viewModel.getExtraversionData().getValue();
+                    if (extraversionData != null) {
+                        Log.d("PropencityQuestions3", "extraversion data: " + Arrays.toString(extraversionData));
                     }
 
-                    Intent intent = new Intent(PropencityQuestions.this, PropencityQuestions2.class);
+                    Intent intent = new Intent(PropencityQuestions3.this, PropencityQuestions4.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(PropencityQuestions.this, "모든 질문에 답변해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PropencityQuestions3.this, "모든 질문에 답변해주세요.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
         @SuppressLint({"MissingInflatedId", "LocalSuppress"})
         TextView text1 = findViewById(R.id.text1);
         String textType = text1.getText().toString();
@@ -138,11 +141,13 @@ public class PropencityQuestions extends AppCompatActivity {
         spannableType.setSpan(new StyleSpan(Typeface.BOLD), startTypeIndex, endTypeIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableType.setSpan(new RelativeSizeSpan(1.2f), startTypeIndex, endTypeIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         text1.setText(spannableType);
+
     }
 
     private int dpToPx(int dp) {
         return (int) (dp * getResources().getDisplayMetrics().density);
     }
+
 
     private boolean allQuestionsAnswered() {
         LinearLayout linearLayout = findViewById(R.id.question_linearlayout);
@@ -161,14 +166,14 @@ public class PropencityQuestions extends AppCompatActivity {
                 }
             }
         }
-        return selectedOptions.size() == 5;
+        return true;
     }
 
     private List<Question> loadQuestionsFromGson() {
         List<Question> questions = new ArrayList<>();
         try {
             InputStream is = getAssets().open("question.json");
-            Reader reader  = new InputStreamReader(is, "UTF-8");
+            Reader reader = new InputStreamReader(is, "UTF-8");
 
             Gson gson = new Gson();
             questions = Arrays.asList(gson.fromJson(reader, Question[].class));
@@ -180,5 +185,3 @@ public class PropencityQuestions extends AppCompatActivity {
         return questions;
     }
 }
-
-

@@ -1,8 +1,7 @@
-package com.example.tour;
+package com.example.tour.recommendTravel;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -10,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tour.R;
+import com.example.tour.question.PropencityQuestions;
 import com.google.gson.Gson;
 
 import java.io.IOException;

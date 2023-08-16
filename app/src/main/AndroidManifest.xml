@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".MyApplication"
+        android:name=".answer.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -15,48 +15,46 @@
         android:theme="@style/Theme.Tour"
         tools:targetApi="31" >
         <activity
-            android:name=".RecommendedCourseLoading"
+            android:name=".recommendTravel.RecommendedCourseLoading"
             android:exported="false" />
         <activity
-            android:name=".RecommendedCourseLoading2"
+            android:name=".recommendTravel.RecommendedCourseLoadingFinish"
             android:exported="false" />
         <activity
-            android:name=".RecommendCourse2"
+            android:name=".recommendTravel.RecommendCourse"
             android:exported="false" >
-
-
         </activity>
         <activity
             android:name=".MyPage"
             android:exported="false" />
         <activity
-            android:name=".SelectTravelArea"
+            android:name=".selectTravelInfo.SelectTravelArea"
             android:exported="false" />
-        <activity android:name=".SelectTravelArea2" />
+        <activity android:name=".selectTravelInfo.SelectTravelArea2" />
         <activity
-            android:name=".SelectTravelMember"
+            android:name=".selectTravelInfo.SelectTravelMember"
             android:exported="false" >
         </activity>
         <activity
-            android:name=".SelectTravelPeriod"
+            android:name=".selectTravelInfo.SelectTravelPeriod"
             android:exported="false" />
         <activity
-            android:name=".PropencityQuestions2"
+            android:name=".question.PropencityQuestions2"
             android:exported="false">
 
         </activity>
         <activity
-            android:name=".PropencityQuestions3"
+            android:name=".question.PropencityQuestions3"
             android:exported="false">
 
         </activity>
         <activity
-            android:name=".PropencityQuestions4"
+            android:name=".question.PropencityQuestions4"
             android:exported="false">
 
         </activity>
         <activity
-            android:name=".PropencityQuestions5"
+            android:name=".question.PropencityQuestions5"
             android:exported="false">
 
         </activity>
@@ -66,25 +64,16 @@
 
         </activity>
         <activity
-            android:name=".SelectDisposition"
-            android:exported="false">
-
-        </activity>
-        <activity
             android:name=".TravelRecord"
             android:exported="false">
         </activity>
         <activity
-            android:name=".TravelAlbum"
-            android:exported="false">
-        </activity>
-        <activity
-            android:name=".RecommendNextTravel"
+            android:name=".recommendTravel.RecommendNextTravel"
             android:exported="false">
         </activity>
 
         <activity
-            android:name=".PropencityQuestions"
+            android:name=".question.PropencityQuestions"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

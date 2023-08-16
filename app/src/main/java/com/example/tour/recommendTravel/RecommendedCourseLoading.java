@@ -1,4 +1,4 @@
-package com.example.tour;
+package com.example.tour.recommendTravel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,10 +7,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.tour.R;
 import com.example.tour.data.Api;
 import com.example.tour.data.RecommendRequest;
 import com.example.tour.data.RecommendResponse;
 import com.example.tour.data.RetrofitClient;
+import com.example.tour.question.PropencityQuestions;
 
 import org.json.JSONObject;
 
@@ -64,12 +66,11 @@ public class RecommendedCourseLoading extends AppCompatActivity {
                             Log.d("Retrofit", "Data sent susccessfully");
                             Log.d("Retrofit", result.get_embedded().getTravelSuggestionsList().toString());
                             List<RecommendResponse.TravelSuggestions> travelList = result.get_embedded().getTravelSuggestionsList();
-                            Intent intent = new Intent(RecommendedCourseLoading.this, RecommendedCourseLoading2.class);
+                            Intent intent = new Intent(RecommendedCourseLoading.this, RecommendedCourseLoadingFinish.class);
                             intent.putExtra("travelSuggestionsList", (Serializable) travelList);
                             startActivity(intent);
 
                         }
-
 
                     } else {
                         Log.d("Retrofit", response.code() + " : Data not sent");
@@ -80,7 +81,6 @@ public class RecommendedCourseLoading extends AppCompatActivity {
                         finish();
                     }
                 }
-
                 @Override
                 public void onFailure(Call<RecommendResponse> call, Throwable t) {
                         Log.d("Retrofit", "Error: " + t.getMessage());
